@@ -120,349 +120,510 @@
       <!-- Simulated Mobile Push Notification Toast -->
       <div id="push-toast-container" class="absolute top-3 left-3 right-3 z-50 pointer-events-none flex flex-col gap-2"></div>
 
-      <!-- Student App Header -->
-      <header class="px-4 pt-3.5 pb-3 bg-white dark:bg-slate-900 border-b border-slate-200/70 dark:border-slate-800 flex items-center justify-between shrink-0">
-        <div class="flex items-center gap-2.5">
-          <div class="relative">
-            <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-slate-800 to-brand-700 text-white font-display font-bold flex items-center justify-center text-sm shadow-sm">
-              AU
-            </div>
-            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+      <!-- STUDENT LOGIN GATE -->
+      <div id="student-login-screen" class="flex-1 flex flex-col justify-between p-5 bg-gradient-to-b from-slate-900 via-slate-900 to-brand-950 text-white overflow-y-auto no-scrollbar">
+        <div class="space-y-4 pt-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-semibold text-indigo-200">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            student.unisync.rw • Enrolled Roster Login
           </div>
           <div>
-            <div class="flex items-center gap-1.5">
-              <h1 class="font-display font-bold text-sm sm:text-base leading-tight">Aline Uwase</h1>
-              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">2026-0842</span>
-            </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Year 2 • BSc Computer Science</p>
+            <h1 class="font-display font-extrabold text-2xl leading-tight">Welcome to <span class="app-brand-title text-emerald-400">UniSync</span></h1>
+            <p class="text-xs text-slate-300 mt-1">Sign in with your official Student ID or username and password to access classes, attendance, results, chats, mail, and documents.</p>
           </div>
-        </div>
 
-        <div class="flex items-center gap-1.5">
-          <button onclick="openNamesModal()" title="Switch App Name" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 transition">
-            <i data-lucide="sparkles" class="w-4 h-4"></i>
-          </button>
-          <button onclick="toggleNotificationsDrawer(true)" class="relative p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200/70 dark:hover:bg-slate-700 transition">
-            <i data-lucide="bell" class="w-4 h-4"></i>
-            <span id="notif-badge" class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center">
-              4
-            </span>
-          </button>
-        </div>
-      </header>
-
-      <!-- Scrollable Student App Body -->
-      <main id="student-scroll-area" class="flex-1 overflow-y-auto no-scrollbar px-4 pt-3.5 pb-24 space-y-4">
-
-        <!-- ===================================================== -->
-        <!-- TAB 1: TODAY / HOME                                   -->
-        <!-- ===================================================== -->
-        <div id="tab-home" class="space-y-4">
-          <!-- Quick Status Strip -->
-          <section class="rounded-3xl p-4 bg-gradient-to-br from-slate-900 via-slate-800 to-brand-900 text-white shadow-lg relative overflow-hidden">
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <div>
-                <span class="text-[10px] uppercase tracking-wider font-bold text-indigo-300">Tue, Nov 17, 2026 • Kigali</span>
-                <h2 class="font-display font-bold text-base mt-0.5">Student Command Hub</h2>
-              </div>
-              <button onclick="openExamCardModal()" class="px-2.5 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-bold flex items-center gap-1.5 transition">
-                <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> Permit
-              </button>
-            </div>
-
-            <!-- 3 Quick Status Pills -->
-            <div class="grid grid-cols-3 gap-2 text-left">
-              <div onclick="switchStudentTab('timetable')" class="cursor-pointer p-2.5 rounded-2xl bg-white/10 hover:bg-white/15 transition">
-                <span class="text-[10px] text-indigo-200 block">Next Class</span>
-                <span id="home-next-class" class="font-display font-extrabold text-xs block mt-0.5 truncate">CSC 212 • 11:00</span>
-                <span class="text-[10px] text-emerald-300 font-semibold">Online Meet</span>
-              </div>
-
-              <div onclick="switchStudentTab('clearance')" class="cursor-pointer p-2.5 rounded-2xl bg-white/10 hover:bg-white/15 transition">
-                <span class="text-[10px] text-indigo-200 block">Exam Clearance</span>
-                <span id="home-clearance-pct" class="font-display font-extrabold text-xs block mt-0.5 text-amber-300">65% Pending</span>
-                <span id="home-clearance-sub" class="text-[10px] text-rose-300 font-semibold">150k RWF Due</span>
-              </div>
-
-              <div onclick="switchStudentTab('tasks')" class="cursor-pointer p-2.5 rounded-2xl bg-white/10 hover:bg-white/15 transition">
-                <span class="text-[10px] text-indigo-200 block">Pending Tasks</span>
-                <span id="home-tasks-count" class="font-display font-extrabold text-xs block mt-0.5">1 Assign • 2 Quiz</span>
-                <span class="text-[10px] text-amber-300 font-semibold">CAT 1 Today</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- Pinned Latest Official Announcement Card -->
-          <section id="home-pinned-announcement" onclick="switchStudentTab('notices')" class="cursor-pointer rounded-3xl p-3.5 bg-white dark:bg-slate-800/90 border border-amber-300/80 dark:border-amber-700/60 shadow-xs hover:border-brand-500 transition space-y-1.5">
-            <!-- Populated dynamically -->
-          </section>
-
-          <!-- Today's Classes List -->
-          <section class="space-y-2.5">
-            <div class="flex items-center justify-between">
-              <div>
-                <h3 class="font-display font-bold text-base">Today's Classes</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Live updates from lecturers</p>
-              </div>
-              <button onclick="switchStudentTab('timetable')" class="text-xs font-bold text-brand-600 dark:text-brand-400 flex items-center gap-1 hover:underline">
-                Full Week <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-              </button>
-            </div>
-            <div id="home-schedule-list" class="space-y-2.5"></div>
-          </section>
-        </div>
-
-        <!-- ===================================================== -->
-        <!-- TAB 2: TIMETABLE (TODAY / WEEKLY GRID / MONTHLY CAL)  -->
-        <!-- ===================================================== -->
-        <div id="tab-timetable" class="hidden space-y-3.5">
-          <div class="flex items-center justify-between">
+          <form onsubmit="handleStudentLogin(event)" class="bg-white/10 backdrop-blur-md border border-white/15 rounded-3xl p-4 space-y-3">
             <div>
-              <h3 class="font-display font-bold text-base">Academic Timetable</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Semester 1 • 2026/2027</p>
+              <label class="block text-[11px] font-bold text-indigo-200 mb-1">Student ID or Username</label>
+              <input id="student-login-user" type="text" required placeholder="e.g., 2026-0842 or aline.uwase" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-xs font-semibold text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400" />
             </div>
-            <span id="timetable-enrolled-pill" class="text-[11px] font-bold px-2.5 py-1 rounded-xl bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300">
-              3 Modules
-            </span>
+            <div>
+              <label class="block text-[11px] font-bold text-indigo-200 mb-1">Password</label>
+              <input id="student-login-pass" type="password" required placeholder="Enter password" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-xs font-semibold text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400" />
+            </div>
+            <p id="student-login-error" class="hidden text-[11px] font-bold text-rose-300 bg-rose-950/60 border border-rose-500/40 rounded-xl px-3 py-2"></p>
+            <button type="submit" class="w-full py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-extrabold text-xs shadow-lg flex items-center justify-center gap-2 transition">
+              <i data-lucide="log-in" class="w-4 h-4"></i> Sign In to Student Portal
+            </button>
+          </form>
+
+          <!-- Demo Credential Helper -->
+          <div class="p-3.5 rounded-2xl bg-slate-950/60 border border-white/10 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-amber-300">Demo Student Account</span>
+              <button type="button" onclick="fillStudentDemo()" class="px-2.5 py-1 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-[10px] font-bold transition">
+                Auto-Fill Credentials
+              </button>
+            </div>
+            <div class="text-[11px] text-slate-300 font-mono space-y-0.5">
+              <p>ID / User: <span class="text-white font-bold">2026-0842</span> (or <span class="text-white font-bold">aline.uwase</span>)</p>
+              <p>Password: <span class="text-white font-bold">Student@2026</span></p>
+            </div>
           </div>
+        </div>
 
-          <!-- Segmented Sub-View Toggle -->
-          <div class="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-slate-200/80 dark:bg-slate-800">
-            <button id="tt-btn-today" onclick="switchTimetableMode('today')" class="py-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-700 text-brand-600 dark:text-white shadow-xs transition">
-              Today
-            </button>
-            <button id="tt-btn-weekly" onclick="switchTimetableMode('weekly')" class="py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 transition">
-              Weekly Grid
-            </button>
-            <button id="tt-btn-monthly" onclick="switchTimetableMode('monthly')" class="py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 transition">
-              Monthly Cal
-            </button>
-          </div>
+        <p class="text-[10px] text-slate-400 text-center pt-4">
+          Only students on the official Registrar roster can log in.
+        </p>
+      </div>
 
-          <!-- Sub-View A: Today -->
-          <div id="tt-panel-today" class="space-y-2.5"></div>
-
-          <!-- Sub-View B: Weekly Mon–Fri Matrix Grid -->
-          <div id="tt-panel-weekly" class="hidden space-y-3">
-            <div class="bg-white dark:bg-slate-800/90 rounded-3xl p-3 border border-slate-200/80 dark:border-slate-700/70 overflow-x-auto">
-              <div class="min-w-[540px]">
-                <div class="grid grid-cols-6 gap-1.5 text-center pb-2 border-b border-slate-100 dark:border-slate-700 text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                  <div class="text-left pl-1">Time</div>
-                  <div class="py-1 rounded-lg">Mon</div>
-                  <div class="py-1 rounded-lg bg-brand-50 dark:bg-brand-950/70 text-brand-600 dark:text-brand-300">Tue (Today)</div>
-                  <div class="py-1 rounded-lg">Wed</div>
-                  <div class="py-1 rounded-lg">Thu</div>
-                  <div class="py-1 rounded-lg">Fri</div>
-                </div>
-                <div id="weekly-matrix-body" class="divide-y divide-slate-100 dark:divide-slate-800 text-[11px]"></div>
+      <!-- AUTHENTICATED STUDENT APP SHELL -->
+      <div id="student-authenticated-app" class="hidden flex-1 flex flex-col min-h-0">
+        <!-- Student App Header -->
+        <header class="px-3.5 pt-3 pb-2.5 bg-white dark:bg-slate-900 border-b border-slate-200/70 dark:border-slate-800 flex items-center justify-between shrink-0">
+          <div class="flex items-center gap-2 min-w-0">
+            <div class="relative shrink-0">
+              <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-slate-800 to-brand-700 text-white font-display font-bold flex items-center justify-center text-xs shadow-sm">
+                AU
               </div>
+              <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 px-1">
-              <i data-lucide="move-horizontal" class="w-3.5 h-3.5 text-brand-500"></i>
-              Swipe horizontally to view Mon–Fri • Tap any block for room/link details
-            </p>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h1 id="student-header-name" class="font-display font-bold text-xs sm:text-sm leading-tight truncate">Aline Uwase</h1>
+                <span id="student-header-id" class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0">2026-0842</span>
+              </div>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate">Year 2 • BSc Computer Science</p>
+            </div>
           </div>
 
-          <!-- Sub-View C: Monthly Calendar (November 2026) -->
-          <div id="tt-panel-monthly" class="hidden space-y-3">
-            <div class="bg-white dark:bg-slate-800/90 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700/70 space-y-3">
+          <div class="flex items-center gap-1 shrink-0">
+            <button onclick="switchStudentTab('hub')" title="Prof Chat, Office Hours, Mail & Documents" class="relative px-2.5 py-1.5 rounded-xl bg-brand-50 dark:bg-brand-950/70 text-brand-700 dark:text-brand-300 text-[11px] font-bold flex items-center gap-1 hover:bg-brand-100 transition">
+              <i data-lucide="message-square-plus" class="w-3.5 h-3.5"></i>
+              <span>Hub</span>
+              <span id="hub-mail-badge" class="min-w-[15px] h-[15px] px-1 rounded-full bg-brand-600 text-white text-[9px] font-extrabold flex items-center justify-center">2</span>
+            </button>
+            <button onclick="toggleNotificationsDrawer(true)" class="relative p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200/70 dark:hover:bg-slate-700 transition">
+              <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+              <span id="notif-badge" class="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center">
+                4
+              </span>
+            </button>
+            <button onclick="logoutStudent()" title="Sign Out" class="p-2 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-300 hover:bg-rose-100 transition">
+              <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- Scrollable Student App Body -->
+        <main id="student-scroll-area" class="flex-1 overflow-y-auto no-scrollbar px-3.5 pt-3 pb-24 space-y-3.5">
+
+          <!-- ===================================================== -->
+          <!-- TAB 1: TODAY / HOME                                   -->
+          <!-- ===================================================== -->
+          <div id="tab-home" class="space-y-3.5">
+            <!-- Quick Status Strip -->
+            <section class="rounded-3xl p-4 bg-gradient-to-br from-slate-900 via-slate-800 to-brand-900 text-white shadow-lg relative overflow-hidden">
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <div>
+                  <span class="text-[10px] uppercase tracking-wider font-bold text-indigo-300">Fri, Nov 20, 2026 • Kigali</span>
+                  <h2 class="font-display font-bold text-base mt-0.5">Student Command Hub</h2>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button onclick="switchStudentTab('hub')" class="px-2.5 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/30 text-emerald-200 text-xs font-bold flex items-center gap-1 transition">
+                    <i data-lucide="mail" class="w-3.5 h-3.5"></i> Chat & Docs
+                  </button>
+                  <button onclick="openExamCardModal()" class="px-2.5 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-bold flex items-center gap-1 transition">
+                    <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> Permit
+                  </button>
+                </div>
+              </div>
+
+              <!-- 3 Quick Status Pills -->
+              <div class="grid grid-cols-3 gap-2 text-left">
+                <div onclick="switchStudentTab('timetable')" class="cursor-pointer p-2.5 rounded-2xl bg-white/10 hover:bg-white/15 transition">
+                  <span class="text-[10px] text-indigo-200 block">Attendance</span>
+                  <span id="home-attendance-pct" class="font-display font-extrabold text-xs block mt-0.5 text-emerald-300">92% Present</span>
+                  <span class="text-[10px] text-indigo-200 font-semibold">PIN Check-In</span>
+                </div>
+
+                <div onclick="switchStudentTab('clearance')" class="cursor-pointer p-2.5 rounded-2xl bg-white/10 hover:bg-white/15 transition">
+                  <span class="text-[10px] text-indigo-200 block">Exam Clearance</span>
+                  <span id="home-clearance-pct" class="font-display font-extrabold text-xs block mt-0.5 text-amber-300">65% Pending</span>
+                  <span id="home-clearance-sub" class="text-[10px] text-rose-300 font-semibold">150k RWF Due</span>
+                </div>
+
+                <div onclick="switchStudentTab('results')" class="cursor-pointer p-2.5 rounded-2xl bg-white/10 hover:bg-white/15 transition">
+                  <span class="text-[10px] text-indigo-200 block">Current GPA</span>
+                  <span id="home-gpa-val" class="font-display font-extrabold text-xs block mt-0.5 text-white">3.68 / 4.0</span>
+                  <span class="text-[10px] text-emerald-300 font-semibold">Quizzes & Exams</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Pinned Latest Official Announcement Card -->
+            <section id="home-pinned-announcement" onclick="switchStudentTab('clearance')" class="cursor-pointer rounded-3xl p-3.5 bg-white dark:bg-slate-800/90 border border-amber-300/80 dark:border-amber-700/60 shadow-xs hover:border-brand-500 transition space-y-1.5"></section>
+
+            <!-- Today's Classes List -->
+            <section class="space-y-2.5">
               <div class="flex items-center justify-between">
-                <h4 class="font-display font-bold text-sm">November 2026</h4>
-                <div class="flex items-center gap-2 text-[10px] font-semibold">
-                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span>Quiz</span>
-                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-indigo-500"></span>Due</span>
-                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500"></span>Exams</span>
+                <div>
+                  <h3 class="font-display font-bold text-base">Today's Classes</h3>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">Live updates from lecturers</p>
                 </div>
+                <button onclick="switchStudentTab('timetable')" class="text-xs font-bold text-brand-600 dark:text-brand-400 flex items-center gap-1 hover:underline">
+                  Timetable & PIN <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                </button>
               </div>
+              <div id="home-schedule-list" class="space-y-2.5"></div>
+            </section>
+          </div>
 
-              <!-- Weekday Headers -->
-              <div class="grid grid-cols-7 text-center text-[10px] font-bold text-slate-400">
-                <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+          <!-- ===================================================== -->
+          <!-- TAB 2: TIMETABLE + ATTENDANCE CHECK-IN                -->
+          <!-- ===================================================== -->
+          <div id="tab-timetable" class="hidden space-y-3.5">
+            <!-- Quick Lecture Attendance PIN Check-In Card -->
+            <div class="bg-white dark:bg-slate-800/95 rounded-3xl p-3.5 border border-brand-200 dark:border-brand-800/60 shadow-xs space-y-2.5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-600 dark:text-brand-400">Live Class Attendance</span>
+                  <h4 class="font-display font-bold text-sm">Check In with Lecturer PIN</h4>
+                </div>
+                <span id="attendance-overall-badge" class="text-[11px] font-extrabold px-2.5 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">92% Avg</span>
               </div>
-
-              <!-- Calendar Days Grid -->
-              <div id="monthly-calendar-grid" class="grid grid-cols-7 gap-1 text-center"></div>
+              <form onsubmit="handleStudentAttendanceCheckIn(event)" class="flex items-center gap-2">
+                <select id="att-course-select" class="px-2.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold"></select>
+                <input id="att-pin-input" type="text" maxlength="4" pattern="\d{4}" required placeholder="4-digit PIN" class="w-24 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-mono font-extrabold text-center tracking-widest" />
+                <button type="submit" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shrink-0 transition">
+                  Mark Present
+                </button>
+              </form>
+              <div id="attendance-course-breakdown" class="grid grid-cols-3 gap-1.5 pt-1"></div>
             </div>
 
-            <!-- Selected Day Events Card -->
-            <div id="monthly-day-detail" class="bg-white dark:bg-slate-800/90 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700/70 space-y-2"></div>
-          </div>
-        </div>
-
-        <!-- ===================================================== -->
-        <!-- TAB 3: TASKS & QUIZZES (HYBRID IN-APP + GMAIL)        -->
-        <!-- ===================================================== -->
-        <div id="tab-tasks" class="hidden space-y-4">
-          <div class="flex items-center justify-between gap-2">
-            <div>
-              <h3 class="font-display font-bold text-base">Tasks & Assessments</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400">In-App upload + automated Gmail sync</p>
-            </div>
-            <span class="text-[10px] font-bold px-2.5 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800/50 flex items-center gap-1">
-              <i data-lucide="mail-check" class="w-3 h-3"></i> Gmail Synced
-            </span>
-          </div>
-
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Assignments</h4>
-              <span id="assignment-count-pill" class="text-[11px] font-bold text-brand-600 dark:text-brand-400">1 Pending</span>
-            </div>
-            <div id="assignments-list" class="space-y-2.5"></div>
-          </div>
-
-          <div class="space-y-2.5 pt-1">
-            <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Quizzes & CATs</h4>
-              <span id="quiz-count-pill" class="text-[11px] font-bold text-amber-600 dark:text-amber-400">2 Upcoming</span>
-            </div>
-            <div id="quizzes-list" class="space-y-2.5"></div>
-          </div>
-        </div>
-
-        <!-- ===================================================== -->
-        <!-- TAB 4: NOTICES (OFFICIAL CAMPUS ANNOUNCEMENTS)        -->
-        <!-- ===================================================== -->
-        <div id="tab-notices" class="hidden space-y-3.5">
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="font-display font-bold text-base">Official Notice Board</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Verified memos from Administration & Guild</p>
-            </div>
-            <button onclick="markAllNoticesRead()" class="text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline">Mark all read</button>
-          </div>
-
-          <!-- Category Filter Pills -->
-          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
-            <button onclick="filterAnnouncements('All')" data-cat="All" class="notice-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 dark:bg-brand-600 text-white shrink-0">All</button>
-            <button onclick="filterAnnouncements('Urgent')" data-cat="Urgent" class="notice-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shrink-0">Urgent</button>
-            <button onclick="filterAnnouncements('Academic')" data-cat="Academic" class="notice-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shrink-0">Academic</button>
-            <button onclick="filterAnnouncements('Campus Life')" data-cat="Campus Life" class="notice-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shrink-0">Campus Life</button>
-          </div>
-
-          <div id="notices-feed-list" class="space-y-3"></div>
-        </div>
-
-        <!-- ===================================================== -->
-        <!-- TAB 5: CLEARANCE & PAY (USSD / BANK / COURSE REG)     -->
-        <!-- ===================================================== -->
-        <div id="tab-clearance" class="hidden space-y-4">
-          <!-- Exam Permit & Clearance Card -->
-          <div class="bg-white dark:bg-slate-800/90 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700/70 shadow-xs space-y-3">
             <div class="flex items-center justify-between">
               <div>
-                <h3 class="font-display font-bold text-base">Exam Clearance & Tuition</h3>
-                <p id="clearance-subtitle" class="text-xs text-slate-500 dark:text-slate-400">65% Complete • 2 steps remaining</p>
+                <h3 class="font-display font-bold text-base">Academic Timetable</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Semester 1 • 2026/2027</p>
               </div>
-              <button onclick="openExamCardModal()" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-brand-600 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs">
-                <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> Exam Card
+              <span id="timetable-enrolled-pill" class="text-[11px] font-bold px-2.5 py-1 rounded-xl bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300">
+                3 Modules
+              </span>
+            </div>
+
+            <!-- Segmented Sub-View Toggle -->
+            <div class="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-slate-200/80 dark:bg-slate-800">
+              <button id="tt-btn-today" onclick="switchTimetableMode('today')" class="py-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-700 text-brand-600 dark:text-white shadow-xs transition">
+                Today
+              </button>
+              <button id="tt-btn-weekly" onclick="switchTimetableMode('weekly')" class="py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 transition">
+                Weekly Grid
+              </button>
+              <button id="tt-btn-monthly" onclick="switchTimetableMode('monthly')" class="py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 transition">
+                Monthly Cal
               </button>
             </div>
 
-            <!-- Progress Bar -->
-            <div class="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
-              <div id="clearance-progress-bar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-500 rounded-full transition-all duration-500" style="width: 65%"></div>
-            </div>
+            <div id="tt-panel-today" class="space-y-2.5"></div>
 
-            <!-- Step 1: Finance / USSD / Bank -->
-            <div id="step-finance-card" class="p-3 rounded-2xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-800/50 flex items-center justify-between gap-2 transition-all">
-              <div class="flex items-center gap-2.5">
-                <div id="step-finance-icon" class="w-8 h-8 rounded-xl bg-rose-500 text-white flex items-center justify-center shrink-0">
-                  <i data-lucide="wallet" class="w-4 h-4"></i>
-                </div>
-                <div>
-                  <p class="text-xs font-bold">1. Tuition & Exam Fee</p>
-                  <p id="step-finance-desc" class="text-[11px] text-rose-600 dark:text-rose-400 font-semibold">Balance: 150,000 RWF due</p>
+            <div id="tt-panel-weekly" class="hidden space-y-3">
+              <div class="bg-white dark:bg-slate-800/90 rounded-3xl p-3 border border-slate-200/80 dark:border-slate-700/70 overflow-x-auto">
+                <div class="min-w-[540px]">
+                  <div class="grid grid-cols-6 gap-1.5 text-center pb-2 border-b border-slate-100 dark:border-slate-700 text-[11px] font-bold text-slate-500 dark:text-slate-400">
+                    <div class="text-left pl-1">Time</div>
+                    <div class="py-1 rounded-lg">Mon</div>
+                    <div class="py-1 rounded-lg">Tue</div>
+                    <div class="py-1 rounded-lg">Wed</div>
+                    <div class="py-1 rounded-lg">Thu</div>
+                    <div class="py-1 rounded-lg bg-brand-50 dark:bg-brand-950/70 text-brand-600 dark:text-brand-300">Fri (Today)</div>
+                  </div>
+                  <div id="weekly-matrix-body" class="divide-y divide-slate-100 dark:divide-slate-800 text-[11px]"></div>
                 </div>
               </div>
-              <button id="btn-pay-tuition" onclick="openPaymentModal()" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-xs transition shrink-0">
-                Pay via USSD / Bank
-              </button>
             </div>
 
-            <!-- Step 2: Library -->
-            <div class="p-3 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/40 flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0">
-                  <i data-lucide="book-open-check" class="w-4 h-4"></i>
+            <div id="tt-panel-monthly" class="hidden space-y-3">
+              <div class="bg-white dark:bg-slate-800/90 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700/70 space-y-3">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-display font-bold text-sm">November 2026</h4>
+                  <div class="flex items-center gap-2 text-[10px] font-semibold">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span>Quiz</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-indigo-500"></span>Due</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500"></span>Exams</span>
+                  </div>
                 </div>
-                <div>
-                  <p class="text-xs font-bold">2. University Library</p>
-                  <p class="text-[11px] text-slate-500 dark:text-slate-400">0 overdue books</p>
+                <div class="grid grid-cols-7 text-center text-[10px] font-bold text-slate-400">
+                  <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
                 </div>
+                <div id="monthly-calendar-grid" class="grid grid-cols-7 gap-1 text-center"></div>
               </div>
-              <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Cleared</span>
-            </div>
-
-            <!-- Step 3: Faculty Units -->
-            <div id="step-faculty-card" class="p-3 rounded-2xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 flex items-center justify-between transition-all">
-              <div class="flex items-center gap-2.5">
-                <div id="step-faculty-icon" class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0">
-                  <i data-lucide="file-check-2" class="w-4 h-4"></i>
-                </div>
-                <div>
-                  <p class="text-xs font-bold">3. Academic Unit Confirmation</p>
-                  <p id="step-faculty-desc" class="text-[11px] text-slate-500 dark:text-slate-400">Confirm registered modules</p>
-                </div>
-              </div>
-              <button id="btn-submit-clearance" onclick="completeFacultyClearance()" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-xs font-bold transition shrink-0">
-                Confirm Units
-              </button>
+              <div id="monthly-day-detail" class="bg-white dark:bg-slate-800/90 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700/70 space-y-2"></div>
             </div>
           </div>
 
-          <!-- Continuing-Student Course Registration -->
-          <div class="bg-white dark:bg-slate-800/90 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700/70 shadow-xs space-y-3">
+          <!-- ===================================================== -->
+          <!-- TAB 3: RESULTS (QUIZ MARKS, CATs & EXAM RESULTS)      -->
+          <!-- ===================================================== -->
+          <div id="tab-results" class="hidden space-y-3.5">
+            <div class="rounded-3xl p-4 bg-gradient-to-r from-indigo-900 via-brand-800 to-slate-900 text-white flex items-center justify-between shadow-md">
+              <div>
+                <span class="text-[10px] uppercase tracking-wider font-bold text-indigo-200">Semester 1 • Academic Transcript</span>
+                <h3 class="font-display font-bold text-base mt-0.5">Quiz Marks & Exam Results</h3>
+                <p class="text-[11px] text-indigo-100 mt-0.5">Continuous Assessment (40%) + Final Exam (60%)</p>
+              </div>
+              <div class="text-right bg-white/15 px-3 py-2 rounded-2xl">
+                <span class="text-[10px] text-indigo-200 block">GPA</span>
+                <span id="results-gpa-display" class="font-display font-extrabold text-lg text-emerald-300">3.68</span>
+              </div>
+            </div>
+            <div id="results-modules-list" class="space-y-2.5"></div>
+          </div>
+
+          <!-- ===================================================== -->
+          <!-- TAB 4: TASKS & QUIZZES (HYBRID IN-APP + GMAIL)        -->
+          <!-- ===================================================== -->
+          <div id="tab-tasks" class="hidden space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <h3 class="font-display font-bold text-base">Tasks & Assessments</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">In-App upload + automated Gmail sync</p>
+              </div>
+              <span class="text-[10px] font-bold px-2.5 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800/50 flex items-center gap-1">
+                <i data-lucide="mail-check" class="w-3 h-3"></i> Gmail Synced
+              </span>
+            </div>
+
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Assignments</h4>
+                <span id="assignment-count-pill" class="text-[11px] font-bold text-brand-600 dark:text-brand-400">1 Pending</span>
+              </div>
+              <div id="assignments-list" class="space-y-2.5"></div>
+            </div>
+
+            <div class="space-y-2.5 pt-1">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Quizzes & CATs</h4>
+                <span id="quiz-count-pill" class="text-[11px] font-bold text-amber-600 dark:text-amber-400">2 Upcoming</span>
+              </div>
+              <div id="quizzes-list" class="space-y-2.5"></div>
+            </div>
+          </div>
+
+          <!-- ===================================================== -->
+          <!-- TAB 5: CLEARANCE & PAY + NOTICES                      -->
+          <!-- ===================================================== -->
+          <div id="tab-clearance" class="hidden space-y-4">
+            <!-- Exam Permit & Clearance Card -->
+            <div class="bg-white dark:bg-slate-800/90 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700/70 shadow-xs space-y-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-display font-bold text-base">Exam Clearance & Tuition</h3>
+                  <p id="clearance-subtitle" class="text-xs text-slate-500 dark:text-slate-400">65% Complete • Action needed</p>
+                </div>
+                <button onclick="openExamCardModal()" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-brand-600 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                  <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> Exam Card
+                </button>
+              </div>
+
+              <div class="w-full h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div id="clearance-progress-bar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-500 rounded-full transition-all duration-500" style="width: 65%"></div>
+              </div>
+
+              <!-- Step 1: Finance -->
+              <div id="step-finance-card" class="p-3 rounded-2xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-800/50 flex items-center justify-between gap-2 transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div id="step-finance-icon" class="w-8 h-8 rounded-xl bg-rose-500 text-white flex items-center justify-center shrink-0">
+                    <i data-lucide="wallet" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold">1. Tuition & Exam Fee</p>
+                    <p id="step-finance-desc" class="text-[11px] text-rose-600 dark:text-rose-400 font-semibold">Balance: 150,000 RWF due</p>
+                  </div>
+                </div>
+                <button id="btn-pay-tuition" onclick="openPaymentModal()" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-xs transition shrink-0">
+                  Pay via USSD / Bank
+                </button>
+              </div>
+
+              <!-- Step 2: Library -->
+              <div class="p-3 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/40 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0">
+                    <i data-lucide="book-open-check" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold">2. University Library</p>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400">0 overdue books</p>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Cleared</span>
+              </div>
+
+              <!-- Step 3: Faculty Units -->
+              <div id="step-faculty-card" class="p-3 rounded-2xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 flex items-center justify-between transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div id="step-faculty-icon" class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0">
+                    <i data-lucide="file-check-2" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold">3. Academic Unit Confirmation</p>
+                    <p id="step-faculty-desc" class="text-[11px] text-slate-500 dark:text-slate-400">Confirm registered modules</p>
+                  </div>
+                </div>
+                <button id="btn-submit-clearance" onclick="completeFacultyClearance()" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-700 text-white text-xs font-bold transition shrink-0">
+                  Confirm Units
+                </button>
+              </div>
+            </div>
+
+            <!-- Official Notice Board Section -->
+            <div class="bg-white dark:bg-slate-800/90 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700/70 shadow-xs space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-display font-bold text-sm">Official Notice Board</h3>
+                <button onclick="markAllNoticesRead()" class="text-[11px] font-bold text-brand-600 dark:text-brand-400 hover:underline">Mark read</button>
+              </div>
+              <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+                <button onclick="filterAnnouncements('All')" data-cat="All" class="notice-filter-btn px-2.5 py-1 rounded-xl text-[11px] font-bold bg-slate-900 dark:bg-brand-600 text-white shrink-0">All</button>
+                <button onclick="filterAnnouncements('Urgent')" data-cat="Urgent" class="notice-filter-btn px-2.5 py-1 rounded-xl text-[11px] font-semibold bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 shrink-0">Urgent</button>
+                <button onclick="filterAnnouncements('Academic')" data-cat="Academic" class="notice-filter-btn px-2.5 py-1 rounded-xl text-[11px] font-semibold bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 shrink-0">Academic</button>
+                <button onclick="filterAnnouncements('Campus Life')" data-cat="Campus Life" class="notice-filter-btn px-2.5 py-1 rounded-xl text-[11px] font-semibold bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 shrink-0">Campus Life</button>
+              </div>
+              <div id="notices-feed-list" class="space-y-2.5"></div>
+            </div>
+
+            <!-- Continuing-Student Course Registration -->
+            <div class="bg-white dark:bg-slate-800/90 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700/70 shadow-xs space-y-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-display font-bold text-base">Course Registration</h3>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">Continuing students • Instant timetable sync</p>
+                </div>
+                <span id="credits-counter" class="text-xs font-bold px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-700">12 / 18 Cr</span>
+              </div>
+              <div id="course-catalog-list" class="space-y-2.5"></div>
+            </div>
+          </div>
+
+          <!-- ===================================================== -->
+          <!-- TAB 6: CAMPUS HUB (PROF CHAT, OFFICE HOURS, MAIL, DOCS) -->
+          <!-- ===================================================== -->
+          <div id="tab-hub" class="hidden space-y-3.5">
             <div class="flex items-center justify-between">
               <div>
-                <h3 class="font-display font-bold text-base">Course Registration</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Continuing students • Instant timetable sync</p>
+                <h3 class="font-display font-bold text-base">Campus Hub</h3>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Prof Chat • Office Hours • App Mail • Documents</p>
               </div>
-              <span id="credits-counter" class="text-xs font-bold px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-700">12 / 18 Cr</span>
+              <button onclick="switchStudentTab('home')" class="text-xs font-bold text-brand-600 dark:text-brand-400">← Back</button>
             </div>
 
-            <!-- Physical Reception Onboarding Policy Banner -->
-            <div class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-700/60 flex items-start gap-2">
-              <i data-lucide="info" class="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0 mt-0.5"></i>
-              <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-snug">
-                <span class="font-bold">New First-Year Fresher?</span> Initial document verification & onboarding happen at the <span class="font-bold">Physical Reception Desk</span>, where staff issue your Student ID & login PIN.
-              </p>
+            <!-- Hub Sub-Tabs -->
+            <div class="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-slate-200/80 dark:bg-slate-800 text-[10px] font-bold">
+              <button id="hub-tab-chat" onclick="switchHubSubTab('chat')" class="py-2 rounded-xl bg-white dark:bg-slate-700 text-brand-600 dark:text-white shadow-xs">Prof Chat</button>
+              <button id="hub-tab-hours" onclick="switchHubSubTab('hours')" class="py-2 rounded-xl text-slate-600 dark:text-slate-400">Office Hrs</button>
+              <button id="hub-tab-mail" onclick="switchHubSubTab('mail')" class="py-2 rounded-xl text-slate-600 dark:text-slate-400">App Mail</button>
+              <button id="hub-tab-docs" onclick="switchHubSubTab('docs')" class="py-2 rounded-xl text-slate-600 dark:text-slate-400">Documents</button>
             </div>
 
-            <div id="course-catalog-list" class="space-y-2.5"></div>
+            <!-- Sub-Panel A: Prof Chat -->
+            <div id="hub-panel-chat" class="bg-white dark:bg-slate-800/90 rounded-3xl p-3.5 border border-slate-200/80 dark:border-slate-700/70 space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <label class="text-xs font-bold text-slate-500">Professor:</label>
+                <select id="chat-prof-select" onchange="renderProfChat()" class="flex-1 px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold">
+                  <option value="Prof. Patrick Mugisha">Prof. Patrick Mugisha (CSC 204)</option>
+                  <option value="Dr. Grace Uwimana">Dr. Grace Uwimana (CSC 212)</option>
+                  <option value="Dr. Jean-Paul Habimana">Dr. Jean-Paul Habimana (MTH 201)</option>
+                </select>
+              </div>
+              <div id="chat-messages-box" class="h-52 overflow-y-auto no-scrollbar p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-700 space-y-2"></div>
+              <form onsubmit="handleSendProfMessage(event)" class="flex items-center gap-2">
+                <input id="chat-message-input" type="text" required placeholder="Ask your professor a question..." class="flex-1 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
+                <button type="submit" class="px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold flex items-center gap-1">
+                  <i data-lucide="send" class="w-3.5 h-3.5"></i> Send
+                </button>
+              </form>
+            </div>
+
+            <!-- Sub-Panel B: Schedule Office Hours -->
+            <div id="hub-panel-hours" class="hidden bg-white dark:bg-slate-800/90 rounded-3xl p-3.5 border border-slate-200/80 dark:border-slate-700/70 space-y-3">
+              <div>
+                <h4 class="font-display font-bold text-sm">Schedule Office Hours</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Book a 15-minute slot with a lecturer or advisor</p>
+              </div>
+              <div id="office-hours-slots" class="space-y-2"></div>
+              <div class="pt-2 border-t border-slate-100 dark:border-slate-700 space-y-1.5">
+                <p class="text-[11px] font-bold text-slate-500 uppercase">Your Booked Sessions</p>
+                <div id="booked-office-hours-list" class="space-y-1.5 text-xs"></div>
+              </div>
+            </div>
+
+            <!-- Sub-Panel C: In-App Mail Inbox -->
+            <div id="hub-panel-mail" class="hidden bg-white dark:bg-slate-800/90 rounded-3xl p-3.5 border border-slate-200/80 dark:border-slate-700/70 space-y-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="font-display font-bold text-sm">In-App University Mail</h4>
+                  <p class="text-[11px] text-slate-500 dark:text-slate-400">aline.uwase@unisync.rw</p>
+                </div>
+                <button onclick="markAllAppMailRead()" class="text-[11px] font-bold text-brand-600">Mark all read</button>
+              </div>
+              <div id="app-mail-list" class="space-y-2"></div>
+            </div>
+
+            <!-- Sub-Panel D: Document Requests & Applicable Fees -->
+            <div id="hub-panel-docs" class="hidden bg-white dark:bg-slate-800/90 rounded-3xl p-3.5 border border-slate-200/80 dark:border-slate-700/70 space-y-3">
+              <div>
+                <h4 class="font-display font-bold text-sm">Request Official Documents</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Select a document, review any applicable fee, and submit</p>
+              </div>
+              <form onsubmit="handleSubmitDocumentRequest(event)" class="space-y-2.5">
+                <div>
+                  <label class="block text-[11px] font-bold mb-1">Document Type</label>
+                  <select id="doc-type-select" onchange="updateDocFeePreview()" class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold">
+                    <option value="Student ID Card" data-fee="5000">Student ID Card — 5,000 RWF</option>
+                    <option value="Tuition Payslip / Fee Statement" data-fee="0">Tuition Payslip / Fee Statement — Free (0 RWF)</option>
+                    <option value="Official Academic Transcript" data-fee="10000">Official Academic Transcript — 10,000 RWF</option>
+                    <option value="Proof of Enrollment Letter" data-fee="2000">Proof of Enrollment Letter — 2,000 RWF</option>
+                  </select>
+                </div>
+                <div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs">
+                  <span class="text-slate-600 dark:text-slate-300 font-medium">Applicable Fee:</span>
+                  <span id="doc-fee-display" class="font-display font-extrabold text-brand-600 dark:text-brand-400">5,000 RWF</span>
+                </div>
+                <input id="doc-note-input" type="text" placeholder="Optional purpose (e.g., Bank account or internship)" class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
+                <button type="submit" class="w-full py-2.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-display font-bold text-xs flex items-center justify-center gap-1.5">
+                  <i data-lucide="file-badge" class="w-4 h-4"></i> Submit Document Request
+                </button>
+              </form>
+
+              <div class="pt-2 border-t border-slate-100 dark:border-slate-700 space-y-2">
+                <p class="text-[11px] font-bold text-slate-500 uppercase">My Document Requests</p>
+                <div id="doc-requests-list" class="space-y-2"></div>
+              </div>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
 
-      <!-- 5-Tab Bottom Navigation Bar -->
-      <nav class="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/80 dark:border-slate-800 px-1.5 py-1.5 grid grid-cols-5 gap-0.5 z-30">
-        <button onclick="switchStudentTab('home')" id="nav-home" class="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-brand-600 dark:text-brand-400 bg-brand-50/80 dark:bg-brand-950/60 transition">
-          <i data-lucide="home" class="w-4 h-4"></i>
-          <span class="text-[10px] font-bold">Home</span>
-        </button>
+        <!-- 5-Tab Bottom Navigation Bar -->
+        <nav class="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/80 dark:border-slate-800 px-1 py-1.5 grid grid-cols-5 gap-0.5 z-30">
+          <button onclick="switchStudentTab('home')" id="nav-home" class="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-brand-600 dark:text-brand-400 bg-brand-50/80 dark:bg-brand-950/60 transition">
+            <i data-lucide="home" class="w-4 h-4"></i>
+            <span class="text-[9px] font-bold">Home</span>
+          </button>
 
-        <button onclick="switchStudentTab('timetable')" id="nav-timetable" class="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
-          <i data-lucide="calendar-range" class="w-4 h-4"></i>
-          <span class="text-[10px] font-semibold">Timetable</span>
-        </button>
+          <button onclick="switchStudentTab('timetable')" id="nav-timetable" class="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            <i data-lucide="calendar-check" class="w-4 h-4"></i>
+            <span class="text-[9px] font-semibold">Class & Att</span>
+          </button>
 
-        <button onclick="switchStudentTab('tasks')" id="nav-tasks" class="relative flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
-          <i data-lucide="clipboard-check" class="w-4 h-4"></i>
-          <span class="text-[10px] font-semibold">Tasks</span>
-          <span class="absolute top-1.5 right-3.5 w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-        </button>
+          <button onclick="switchStudentTab('results')" id="nav-results" class="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            <i data-lucide="award" class="w-4 h-4"></i>
+            <span class="text-[9px] font-semibold">Results</span>
+          </button>
 
-        <button onclick="switchStudentTab('notices')" id="nav-notices" class="relative flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
-          <i data-lucide="megaphone" class="w-4 h-4"></i>
-          <span class="text-[10px] font-semibold">Notices</span>
-          <span id="nav-notices-dot" class="absolute top-1.5 right-3.5 w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-        </button>
+          <button onclick="switchStudentTab('tasks')" id="nav-tasks" class="relative flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            <i data-lucide="clipboard-check" class="w-4 h-4"></i>
+            <span class="text-[9px] font-semibold">Tasks</span>
+            <span class="absolute top-1.5 right-3 w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+          </button>
 
-        <button onclick="switchStudentTab('clearance')" id="nav-clearance" class="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
-          <i data-lucide="badge-check" class="w-4 h-4"></i>
-          <span class="text-[10px] font-semibold">Clearance</span>
-        </button>
-      </nav>
+          <button onclick="switchStudentTab('clearance')" id="nav-clearance" class="relative flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            <i data-lucide="badge-check" class="w-4 h-4"></i>
+            <span class="text-[9px] font-semibold">Clearance</span>
+            <span id="nav-notices-dot" class="absolute top-1.5 right-2.5 w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+          </button>
+        </nav>
+      </div>
 
       <!-- ===================================================== -->
       <!-- STUDENT MODALS & DRAWERS (Inside Phone Frame)         -->
@@ -492,7 +653,6 @@
             <button type="button" id="pay-tab-bank" onclick="switchPayMethod('bank')" class="py-2 rounded-xl text-[11px] font-semibold text-slate-600 dark:text-slate-400">Bank Slip</button>
           </div>
 
-          <!-- MTN MoMo / Airtel USSD -->
           <div id="pay-panel-ussd" class="space-y-3">
             <div class="p-3 rounded-2xl border border-amber-300/80 dark:border-amber-700/50 bg-amber-50/60 dark:bg-amber-950/20 space-y-2">
               <div class="flex items-center justify-between">
@@ -512,7 +672,6 @@
             </button>
           </div>
 
-          <!-- UrubutoPay -->
           <div id="pay-panel-urubuto" class="hidden space-y-3">
             <div class="p-3 rounded-2xl border border-indigo-200 dark:border-indigo-800/60 bg-indigo-50/50 dark:bg-indigo-950/20 space-y-2">
               <span class="text-xs font-bold text-indigo-900 dark:text-indigo-200">UrubutoPay Education Gateway</span>
@@ -528,7 +687,6 @@
             </button>
           </div>
 
-          <!-- Bank Slip Upload -->
           <form id="pay-panel-bank" onsubmit="submitBankSlipForApproval(event)" class="hidden space-y-3">
             <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1.5 text-xs">
               <div class="flex justify-between">
@@ -571,10 +729,6 @@
           <div>
             <label class="block text-xs font-semibold mb-1">Or Paste Google Drive / GitHub Link</label>
             <input id="assign-drive-input" type="url" placeholder="https://drive.google.com/file/d/..." class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs" />
-          </div>
-          <div class="p-2.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/40 text-[11px] text-slate-700 dark:text-slate-300 flex items-center gap-2">
-            <i data-lucide="mail-check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-            <span>Automatically sends a timestamped receipt to your <strong>Gmail</strong> & lecturer's inbox.</span>
           </div>
           <button type="submit" class="w-full py-3 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-display font-bold text-xs flex items-center justify-center gap-2 transition">
             <i data-lucide="check-circle" class="w-4 h-4"></i> Submit Work & Email Receipt
@@ -645,9 +799,6 @@
               </span>
             </div>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400">
-            Unlocks to <span class="font-bold text-emerald-600 dark:text-emerald-400">Verified Green</span> once Finance approves your tuition and you confirm your academic units. Cached offline for exam hall entry.
-          </p>
           <button onclick="closeExamCardModal()" class="w-full py-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800 font-bold text-xs">Close</button>
         </div>
       </div>
@@ -677,7 +828,53 @@
   <!-- PORTAL 2: STAFF & BOARD WEB PORTAL (board.unisync.rw)     -->
   <!-- ========================================================= -->
   <div id="portal-board" class="hidden w-full flex-1 max-w-6xl mx-auto p-3 sm:p-6">
-    <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl overflow-hidden flex flex-col md:flex-row min-h-[720px]">
+    <!-- STAFF / BOARD LOGIN GATE -->
+    <div id="board-login-screen" class="max-w-md mx-auto my-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">board.unisync.rw</span>
+        <span class="text-[11px] text-slate-400">Staff & Admin Auth</span>
+      </div>
+      <div>
+        <h2 class="font-display font-extrabold text-xl">Staff & Board Sign In</h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Authenticate with your Lecturer or Registrar/Board credentials.</p>
+      </div>
+
+      <form onsubmit="handleBoardLogin(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold mb-1">Staff Username</label>
+          <input id="board-login-user" type="text" required placeholder="e.g., patrick.mugisha or registrar.admin" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold mb-1">Password</label>
+          <input id="board-login-pass" type="password" required placeholder="Enter staff password" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold" />
+        </div>
+        <p id="board-login-error" class="hidden text-xs font-bold text-rose-600 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 rounded-xl px-3 py-2"></p>
+        <button type="submit" class="w-full py-3 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-display font-bold text-xs shadow-md flex items-center justify-center gap-2 transition">
+          <i data-lucide="shield-check" class="w-4 h-4"></i> Access Staff & Board Console
+        </button>
+      </form>
+
+      <div class="p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800/80 space-y-2 text-xs">
+        <p class="font-bold text-slate-700 dark:text-slate-200">Demo Staff & Board Credentials:</p>
+        <div class="flex items-center justify-between gap-2 bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700">
+          <div class="font-mono text-[11px]">
+            <p class="font-bold">Lecturer: <span class="text-brand-600">patrick.mugisha</span></p>
+            <p class="text-slate-500">Pass: <span class="font-bold text-slate-700 dark:text-slate-300">Lecturer@2026</span></p>
+          </div>
+          <button type="button" onclick="fillBoardDemo('lecturer')" class="px-2.5 py-1.5 rounded-lg bg-brand-600 text-white text-[10px] font-bold">Fill Lecturer</button>
+        </div>
+        <div class="flex items-center justify-between gap-2 bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700">
+          <div class="font-mono text-[11px]">
+            <p class="font-bold">Admin/Board: <span class="text-emerald-600">registrar.admin</span></p>
+            <p class="text-slate-500">Pass: <span class="font-bold text-slate-700 dark:text-slate-300">Board@2026</span></p>
+          </div>
+          <button type="button" onclick="fillBoardDemo('admin')" class="px-2.5 py-1.5 rounded-lg bg-emerald-600 text-white text-[10px] font-bold">Fill Admin</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUTHENTICATED BOARD WORKSPACE -->
+    <div id="board-authenticated-app" class="hidden bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl overflow-hidden flex flex-col md:flex-row min-h-[720px]">
 
       <!-- Left Sidebar Navigation -->
       <aside class="w-full md:w-64 bg-slate-900 text-white p-4 sm:p-5 flex flex-col justify-between shrink-0">
@@ -685,13 +882,13 @@
           <div>
             <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">board.unisync.rw</span>
             <h2 class="font-display font-extrabold text-lg mt-0.5">Staff & Board Portal</h2>
-            <p class="text-xs text-slate-400">University Administration Console</p>
+            <p id="board-active-user-label" class="text-xs text-slate-400">Prof. Patrick Mugisha</p>
           </div>
 
           <nav class="grid grid-cols-2 md:grid-cols-1 gap-1.5">
             <button onclick="switchBoardModule('lecturer')" id="board-nav-lecturer" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold bg-brand-600 text-white shadow-sm text-left transition">
               <i data-lucide="presentation" class="w-4 h-4 shrink-0"></i>
-              <span>Lecturer Console</span>
+              <span>Lecturer & Marks</span>
             </button>
 
             <button onclick="switchBoardModule('announcements')" id="board-nav-announcements" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-slate-300 hover:bg-slate-800 text-left transition">
@@ -714,24 +911,18 @@
           </nav>
         </div>
 
-        <div class="hidden md:block pt-5 border-t border-slate-800 space-y-2.5">
-          <div class="p-3 rounded-2xl bg-slate-800/80 text-xs space-y-1">
-            <p class="font-bold text-emerald-400 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Live Student Sync
-            </p>
-            <p class="text-[11px] text-slate-400 leading-relaxed">
-              Every update published here pushes immediately to <span class="text-slate-200 font-mono">student.unisync.rw</span>.
-            </p>
-          </div>
+        <div class="hidden md:block pt-5 border-t border-slate-800 space-y-2">
           <button onclick="switchPortal('student')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition">
             <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> Preview Student Phone
+          </button>
+          <button onclick="logoutBoard()" class="w-full py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/70 text-rose-200 text-xs font-bold flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Sign Out Staff
           </button>
         </div>
       </aside>
 
       <!-- Right Board Content Workspace -->
       <div class="flex-1 p-4 sm:p-6 bg-slate-50/70 dark:bg-slate-900/50 overflow-y-auto space-y-5">
-        <!-- Board Toast Banner -->
         <div id="board-feedback-banner" class="hidden p-3.5 rounded-2xl bg-emerald-600 text-white text-xs font-semibold flex items-center justify-between gap-3 shadow-md">
           <span id="board-feedback-text">Action synced to Student App!</span>
           <button onclick="switchPortal('student')" class="px-3 py-1 rounded-xl bg-white text-emerald-900 font-bold text-[11px] shrink-0">
@@ -739,18 +930,28 @@
           </button>
         </div>
 
-        <!-- =================================================== -->
-        <!-- MODULE 1: LECTURER CONSOLE                          -->
-        <!-- =================================================== -->
+        <!-- MODULE 1: LECTURER CONSOLE + ATTENDANCE PIN + MARKS -->
         <div id="board-mod-lecturer" class="space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h1 class="font-display font-extrabold text-xl">Lecturer Academic Console</h1>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Prof. Patrick Mugisha • Department of Computer Science</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Broadcast schedule changes, attendance PINs, tasks & exam marks</p>
             </div>
             <span class="text-xs font-bold px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
               Verified Faculty Staff
             </span>
+          </div>
+
+          <!-- Active Attendance PIN Control Bar -->
+          <div class="bg-white dark:bg-slate-800 rounded-3xl p-4 border border-slate-200/80 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-600">Active Student Check-In PIN</span>
+              <h3 class="font-display font-bold text-sm">Lecture Attendance PIN: <code id="board-current-pin" class="px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-900 font-mono text-brand-600 dark:text-brand-400">4829</code></h3>
+              <p class="text-[11px] text-slate-500">Students enter this 4-digit PIN inside the Class & Att tab.</p>
+            </div>
+            <button type="button" onclick="rotateAttendancePin()" class="px-3.5 py-2 rounded-xl bg-slate-900 dark:bg-brand-600 text-white text-xs font-bold flex items-center gap-1.5">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Generate New PIN
+            </button>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -760,12 +961,10 @@
                 <i data-lucide="radio" class="w-4 h-4 text-brand-600"></i>
                 Instant Class Schedule Update
               </h2>
-
               <div>
                 <label class="block text-xs font-semibold mb-1">Course Module</label>
                 <select id="lec-course-select" onchange="prefillLecturerCourseFields()" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold"></select>
               </div>
-
               <div>
                 <label class="block text-xs font-semibold mb-1">Session Status</label>
                 <div class="grid grid-cols-2 gap-2">
@@ -775,7 +974,6 @@
                   <button type="button" data-status="Canceled" onclick="selectLecStatus('Canceled')" class="lec-status-btn py-2 px-3 rounded-xl text-xs font-semibold border border-slate-200 dark:border-slate-700">Cancel Class</button>
                 </div>
               </div>
-
               <div class="grid grid-cols-2 gap-3">
                 <div>
                   <label class="block text-xs font-semibold mb-1">Time Slot</label>
@@ -786,24 +984,42 @@
                   <input id="lec-room-input" type="text" value="Room B12" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
                 </div>
               </div>
-
               <div>
-                <label class="block text-xs font-semibold mb-1">Online Meeting Link (Google Meet / Zoom)</label>
+                <label class="block text-xs font-semibold mb-1">Online Meeting Link</label>
                 <input id="lec-link-input" type="url" placeholder="https://meet.google.com/abc-defg-hij" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
               </div>
-
               <div>
                 <label class="block text-xs font-semibold mb-1">Note to Enrolled Students</label>
                 <input id="lec-note-input" type="text" placeholder="e.g., Bring laptops for SQL practicals" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
               </div>
-
               <button type="submit" class="w-full py-3 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-display font-bold text-xs shadow-md flex items-center justify-center gap-2 transition">
                 <i data-lucide="send" class="w-4 h-4"></i> Push Update to Student App
               </button>
             </form>
 
-            <!-- Post Assignment & Quiz -->
+            <!-- Update Quiz Marks & Exam Results + Tasks -->
             <div class="space-y-4">
+              <form onsubmit="handleUpdateMarks(event)" class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-700 shadow-xs space-y-3">
+                <h2 class="font-display font-bold text-base flex items-center gap-2">
+                  <i data-lucide="award" class="w-4 h-4 text-emerald-500"></i>
+                  Update Quiz Marks & Exam Results (2026-0842)
+                </h2>
+                <div class="grid grid-cols-3 gap-2">
+                  <select id="marks-course-select" class="col-span-3 px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold"></select>
+                  <div>
+                    <label class="block text-[10px] font-bold text-slate-500 mb-1">Quiz/CAT (/40)</label>
+                    <input id="marks-cat-input" type="number" min="0" max="40" value="34" required class="w-full px-2.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold" />
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-slate-500 mb-1">Exam (/60)</label>
+                    <input id="marks-exam-input" type="number" min="0" max="60" value="51" required class="w-full px-2.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold" />
+                  </div>
+                  <div class="flex items-end">
+                    <button type="submit" class="w-full py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition">Save Marks</button>
+                  </div>
+                </div>
+              </form>
+
               <form onsubmit="handlePostAssignment(event)" class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-700 shadow-xs space-y-3">
                 <div class="flex items-center justify-between">
                   <h2 class="font-display font-bold text-base flex items-center gap-2">
@@ -814,7 +1030,7 @@
                 </div>
                 <div class="grid grid-cols-2 gap-2.5">
                   <select id="assign-course-select" class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold"></select>
-                  <input id="assign-due-input" type="text" value="Fri, Nov 20 • 11:59 PM" required class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
+                  <input id="assign-due-input" type="text" value="Mon, Nov 23 • 11:59 PM" required class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
                 </div>
                 <input id="assign-title-input" type="text" placeholder="Assignment Title (e.g., Lab 3: SQL Normalization)" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
                 <button type="submit" class="w-full py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-display font-bold text-xs flex items-center justify-center gap-1.5 transition">
@@ -829,7 +1045,7 @@
                 </h2>
                 <div class="grid grid-cols-2 gap-2.5">
                   <select id="quiz-course-select" class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold"></select>
-                  <input id="quiz-when-input" type="text" value="Thu, Nov 19 • 09:00 AM" required class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
+                  <input id="quiz-when-input" type="text" value="Tue, Nov 24 • 09:00 AM" required class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
                 </div>
                 <input id="quiz-topic-input" type="text" placeholder="Quiz Topic & Room (e.g., Quiz 2: Joins — Room B10)" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
                 <button type="submit" class="w-full py-2.5 rounded-2xl bg-slate-900 dark:bg-slate-700 text-white font-display font-bold text-xs flex items-center justify-center gap-1.5 transition">
@@ -840,19 +1056,15 @@
           </div>
         </div>
 
-        <!-- =================================================== -->
-        <!-- MODULE 2: CAMPUS ANNOUNCEMENTS                      -->
-        <!-- =================================================== -->
+        <!-- MODULE 2: CAMPUS ANNOUNCEMENTS -->
         <div id="board-mod-announcements" class="hidden space-y-5">
           <div>
             <h1 class="font-display font-extrabold text-xl">Official Campus Announcements</h1>
             <p class="text-xs text-slate-500 dark:text-slate-400">Broadcast verified university memos directly to students' Notice Board & push alerts</p>
           </div>
-
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
             <form onsubmit="handlePublishAnnouncement(event)" class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-700 shadow-xs space-y-3.5">
               <h2 class="font-display font-bold text-base">Compose Official Memo</h2>
-
               <div class="grid grid-cols-2 gap-3">
                 <div>
                   <label class="block text-xs font-semibold mb-1">Issuing Office</label>
@@ -872,28 +1084,22 @@
                   </select>
                 </div>
               </div>
-
               <div>
                 <label class="block text-xs font-semibold mb-1">Announcement Headline</label>
                 <input id="ann-title-input" type="text" placeholder="e.g., Final Exam Timetable & Clearance Deadline" required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-medium" />
               </div>
-
               <div>
                 <label class="block text-xs font-semibold mb-1">Message Details</label>
                 <textarea id="ann-body-input" rows="3" placeholder="Write clear instructions for students..." required class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs"></textarea>
               </div>
-
               <label class="flex items-center gap-2 p-2.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/40 cursor-pointer">
                 <input id="ann-push-check" type="checkbox" checked class="rounded text-brand-600" />
                 <span class="text-xs font-semibold text-slate-700 dark:text-slate-200">Trigger instant mobile push notification banner on student phones</span>
               </label>
-
               <button type="submit" class="w-full py-3 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-display font-bold text-xs shadow-md flex items-center justify-center gap-2 transition">
                 <i data-lucide="megaphone" class="w-4 h-4"></i> Publish Announcement to Campus
               </button>
             </form>
-
-            <!-- Live Published Notices List -->
             <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-700 shadow-xs space-y-3">
               <h2 class="font-display font-bold text-base">Active Campus Notices</h2>
               <div id="board-announcements-list" class="space-y-2.5 max-h-[380px] overflow-y-auto no-scrollbar"></div>
@@ -901,19 +1107,16 @@
           </div>
         </div>
 
-        <!-- =================================================== -->
-        <!-- MODULE 3: FINANCE & CLEARANCE QUEUE                 -->
-        <!-- =================================================== -->
+        <!-- MODULE 3: FINANCE & CLEARANCE QUEUE -->
         <div id="board-mod-finance" class="hidden space-y-5">
           <div>
             <h1 class="font-display font-extrabold text-xl">Finance & Exam Clearance Queue</h1>
             <p class="text-xs text-slate-500 dark:text-slate-400">Verify USSD auto-settlements & bank deposit slips to unlock student Exam Permits</p>
           </div>
-
           <div class="grid grid-cols-3 gap-3">
             <div class="p-4 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700">
               <p class="text-xs text-slate-500">Cleared Students</p>
-              <p id="board-kpi-cleared" class="font-display font-extrabold text-2xl text-emerald-600 mt-1">84.2%</p>
+              <p class="font-display font-extrabold text-2xl text-emerald-600 mt-1">84.2%</p>
               <p class="text-[11px] text-slate-400">1,420 / 1,686 enrolled</p>
             </div>
             <div class="p-4 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700">
@@ -927,22 +1130,18 @@
               <p class="text-[11px] text-slate-400">Zero manual queue</p>
             </div>
           </div>
-
           <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-700 shadow-xs space-y-3">
             <h2 class="font-display font-bold text-base">Bank Deposit Verification Queue</h2>
             <div id="board-finance-queue" class="space-y-3"></div>
           </div>
         </div>
 
-        <!-- =================================================== -->
-        <!-- MODULE 4: RECEPTION & ROOM CONTROL                  -->
-        <!-- =================================================== -->
+        <!-- MODULE 4: RECEPTION & ROOM CONTROL -->
         <div id="board-mod-reception" class="hidden space-y-5">
           <div>
             <h1 class="font-display font-extrabold text-xl">Physical Reception & Campus Room Control</h1>
             <p class="text-xs text-slate-500 dark:text-slate-400">Onboard newly admitted first-year students & monitor live lecture halls</p>
           </div>
-
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
             <form onsubmit="handleReceptionOnboard(event)" class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-700 shadow-xs space-y-3.5">
               <div class="flex items-center gap-2">
@@ -954,9 +1153,6 @@
                   <p class="text-[11px] text-slate-500">For students verified at Physical Admissions Reception</p>
                 </div>
               </div>
-              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                First-year students complete document verification in person at Reception. Generate their official Student ID & SMS login PIN here so they can log into <span class="font-mono font-bold">student.unisync.rw</span>.
-              </p>
               <div class="grid grid-cols-2 gap-3">
                 <div>
                   <label class="block text-xs font-semibold mb-1">Student Full Name</label>
@@ -971,7 +1167,6 @@
                 <i data-lucide="key-round" class="w-4 h-4"></i> Issue Student ID & SMS Temporary PIN
               </button>
             </form>
-
             <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-700 shadow-xs space-y-3">
               <div class="flex items-center justify-between">
                 <h2 class="font-display font-bold text-base">Live Campus Room Occupancy</h2>
@@ -1002,10 +1197,7 @@
       <p class="text-xs text-slate-500 dark:text-slate-400">Tap a name to preview it across both the Student App and Board Portal:</p>
       <div class="space-y-2">
         <button onclick="applyAppName('UniSync')" class="w-full text-left p-3 rounded-2xl border border-brand-500 bg-brand-50/60 dark:bg-brand-950/40">
-          <div class="flex items-center justify-between">
-            <span class="font-display font-bold text-sm text-brand-700 dark:text-brand-300">UniSync</span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-600 text-white">Recommended</span>
-          </div>
+          <span class="font-display font-bold text-sm text-brand-700 dark:text-brand-300">UniSync</span>
           <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5">Highlights instant synchronization between lecturers, finance, and students.</p>
         </button>
         <button onclick="applyAppName('CampusPulse')" class="w-full text-left p-3 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-brand-400">
@@ -1026,18 +1218,33 @@
 
   <script>
     // =========================================================
-    // GLOBAL APPLICATION STATE
+    // AUTH CREDENTIALS & SESSION STATE
     // =========================================================
+    const AUTH_USERS = {
+      students: [
+        { ids: ['2026-0842', 'aline.uwase'], password: 'Student@2026', name: 'Aline Uwase', code: '2026-0842' }
+      ],
+      staff: [
+        { username: 'patrick.mugisha', password: 'Lecturer@2026', displayName: 'Prof. Patrick Mugisha • Lecturer', role: 'lecturer' },
+        { username: 'registrar.admin', password: 'Board@2026', displayName: 'Office of the Registrar • Admin', role: 'admin' }
+      ]
+    };
+
+    let currentStudentSession = null;
+    let currentBoardSession = null;
+    let currentAttendancePin = '4829';
+
     let currentPortal = 'student';
     let currentStudentTab = 'home';
+    let currentHubSubTab = 'chat';
     let currentTimetableMode = 'today';
     let currentNoticeCategory = 'All';
-    let selectedCalendarDay = 17; // Nov 17, 2026
+    let selectedCalendarDay = 20;
     let selectedModalCourseId = null;
     let selectedAssignmentId = null;
     let selectedLecStatus = 'On Time';
 
-    let tuitionStatus = 'unpaid'; // 'unpaid' | 'pending_review' | 'cleared'
+    let tuitionStatus = 'unpaid';
     let facultyCleared = false;
 
     const courses = [
@@ -1054,6 +1261,11 @@
         meetingLink: '',
         note: 'Moved from Lab 1 to Room B12 due to network upgrade.',
         reminder30m: true,
+        attendedClasses: 11,
+        totalClasses: 12,
+        checkedInToday: false,
+        catScore: 34,
+        examScore: 51,
         weeklySlots: [
           { day: 'Mon', slot: '08:30 - 10:30' },
           { day: 'Tue', slot: '08:30 - 10:30' },
@@ -1073,6 +1285,11 @@
         meetingLink: 'https://meet.google.com/uni-sync-kgl',
         note: 'Live coding session online today. Slides uploaded.',
         reminder30m: true,
+        attendedClasses: 10,
+        totalClasses: 12,
+        checkedInToday: false,
+        catScore: 31,
+        examScore: 47,
         weeklySlots: [
           { day: 'Tue', slot: '11:00 - 13:00' },
           { day: 'Wed', slot: '08:30 - 10:30' },
@@ -1092,9 +1309,14 @@
         meetingLink: '',
         note: 'Bring scientific calculators for tutorial review.',
         reminder30m: false,
+        attendedClasses: 12,
+        totalClasses: 12,
+        checkedInToday: false,
+        catScore: 36,
+        examScore: 52,
         weeklySlots: [
           { day: 'Mon', slot: '14:30 - 16:30' },
-          { day: 'Tue', slot: '14:30 - 16:30' },
+          { day: 'Fri', slot: '14:30 - 16:30' },
           { day: 'Thu', slot: '14:30 - 16:30' }
         ]
       },
@@ -1111,6 +1333,11 @@
         meetingLink: '',
         note: 'Optional elective — startup pitch workshop.',
         reminder30m: false,
+        attendedClasses: 9,
+        totalClasses: 10,
+        checkedInToday: false,
+        catScore: 35,
+        examScore: 49,
         weeklySlots: [
           { day: 'Wed', slot: '14:30 - 16:30' },
           { day: 'Fri', slot: '08:30 - 10:30' }
@@ -1118,16 +1345,10 @@
       }
     ];
 
-    // November 2026 Events (Nov 1, 2026 is Sunday)
     const novemberEvents = {
       5: [{ type: 'event', title: 'Tech Innovation Club Hack-Night', meta: '17:00 • ICT Auditorium' }],
       10: [{ type: 'quiz', title: 'MTH 201 Quiz 1', meta: '09:00 AM • Auditorium C' }],
-      14: [{ type: 'quiz', title: 'CSC 212 Quiz 1 (Missed)', meta: '11:00 AM • Lab 2' }],
-      17: [
-        { type: 'quiz', title: 'CSC 204 CAT 1: Relational Algebra', meta: '13:00 • Room B12' },
-        { type: 'class', title: '3 Regular Lectures Scheduled', meta: 'Today • See Today tab' }
-      ],
-      18: [{ type: 'due', title: 'CSC 204 Lab 2 Due', meta: '11:59 PM • App + Gmail' }],
+      17: [{ type: 'quiz', title: 'CSC 204 CAT 1: Relational Algebra', meta: '13:00 • Room B12' }],
       20: [
         { type: 'quiz', title: 'MTH 201 Quiz 2: Graph Theory', meta: '09:00 AM • Auditorium C' },
         { type: 'event', title: 'Tuition Clearance Deadline', meta: '17:00 • Pay via USSD/Bank' }
@@ -1138,52 +1359,13 @@
     };
 
     let assignments = [
-      {
-        id: 'a1',
-        courseCode: 'CSC 204',
-        title: 'Lab 2: ER Diagram & SQL Queries',
-        due: 'Tomorrow, 11:59 PM',
-        submitted: false,
-        submittedRef: ''
-      },
-      {
-        id: 'a2',
-        courseCode: 'CSC 212',
-        title: 'Assignment 1: Java Inheritance Mini-Project',
-        due: 'Submitted Nov 15',
-        submitted: true,
-        submittedRef: 'OOP_Project_Uwase.pdf • Gmail Receipt #441'
-      }
+      { id: 'a1', courseCode: 'CSC 204', title: 'Lab 2: ER Diagram & SQL Queries', due: 'Mon, Nov 23 • 11:59 PM', submitted: false, submittedRef: '' },
+      { id: 'a2', courseCode: 'CSC 212', title: 'Assignment 1: Java Inheritance Mini-Project', due: 'Submitted Nov 15', submitted: true, submittedRef: 'OOP_Project_Uwase.pdf • Gmail Receipt #441' }
     ];
 
     let quizzes = [
-      {
-        id: 'q1',
-        courseCode: 'CSC 204',
-        courseName: 'Database Management Systems',
-        title: 'CAT 1: Relational Algebra & ER Diagrams',
-        when: 'Today, 13:00 • Room B12',
-        status: 'upcoming',
-        makeupRequested: false
-      },
-      {
-        id: 'q2',
-        courseCode: 'CSC 212',
-        courseName: 'Object-Oriented Programming',
-        title: 'Quiz 1: Polymorphism & Interfaces',
-        when: 'Held Nov 14 • Missed',
-        status: 'missed',
-        makeupRequested: false
-      },
-      {
-        id: 'q3',
-        courseCode: 'MTH 201',
-        courseName: 'Discrete Mathematics',
-        title: 'Quiz 2: Graph Theory Basics',
-        when: 'Fri, Nov 20 • 09:00 AM',
-        status: 'upcoming',
-        makeupRequested: false
-      }
+      { id: 'q1', courseCode: 'MTH 201', courseName: 'Discrete Mathematics', title: 'Quiz 2: Graph Theory Basics', when: 'Today, 09:00 AM • Auditorium C', status: 'upcoming', makeupRequested: false },
+      { id: 'q2', courseCode: 'CSC 212', courseName: 'Object-Oriented Programming', title: 'Quiz 1: Polymorphism & Interfaces', when: 'Held Nov 14 • Missed', status: 'missed', makeupRequested: false }
     ];
 
     let announcements = [
@@ -1191,8 +1373,8 @@
         id: 'ann-1',
         sender: 'Office of the Registrar',
         category: 'Urgent',
-        title: 'Exam Clearance & Permit Verification Deadline: Nov 20',
-        body: 'All continuing students must settle tuition balances via MTN MoMo USSD (*182*8*1#) or upload verified bank slips before Friday 5:00 PM to unlock their Digital Exam Permit.',
+        title: 'Exam Clearance & Permit Verification Deadline: Today Nov 20',
+        body: 'Settle tuition balances via MTN MoMo USSD (*182*8*1#) or upload verified bank slips before 5:00 PM today to unlock your Digital Exam Permit.',
         time: '25 mins ago',
         unread: true
       },
@@ -1200,8 +1382,8 @@
         id: 'ann-2',
         sender: 'Faculty of ICT',
         category: 'Academic',
-        title: 'Network Maintenance in ICT Lab 1 & 2',
-        body: 'Practical sessions scheduled in ICT Lab 1 today have been relocated to Room B12. Check your live timetable for updated room assignments.',
+        title: 'Quiz & Exam Marks Published for Semester 1 Modules',
+        body: 'Continuous assessment (CAT/Quiz) and provisional exam scores are now available under the Results tab.',
         time: '2 hours ago',
         unread: true
       },
@@ -1209,8 +1391,8 @@
         id: 'ann-3',
         sender: 'Student Guild Council',
         category: 'Campus Life',
-        title: 'Kigali Campus Tech & Career Fair — Friday',
-        body: 'Join local software companies and fintech recruiters at the Main Auditorium this Friday from 2:00 PM. Bring your student ID.',
+        title: 'Kigali Campus Tech & Career Fair — Today',
+        body: 'Meet local software companies and fintech recruiters at the Main Auditorium starting at 2:00 PM.',
         time: 'Yesterday',
         unread: false
       }
@@ -1230,42 +1412,159 @@
     ];
 
     let notifications = [
+      { id: 'n1', title: 'Urgent: Clearance Deadline Today', body: 'Complete Step 1 & Step 3 before 5:00 PM to unlock your Exam Permit.', time: '25m ago', unread: true },
+      { id: 'n2', title: 'Room Moved: CSC 204', body: 'Prof. Mugisha moved Database Systems to Room B12 (08:30 - 10:30).', time: '40m ago', unread: true },
+      { id: 'n3', title: 'Results Updated', body: 'CAT & exam marks are live in your Results tab.', time: '2h ago', unread: true },
+      { id: 'n4', title: 'Attendance PIN Active', body: `Use PIN ${currentAttendancePin} in Class & Att tab to check in.`, time: 'Just now', unread: true }
+    ];
+
+    // Prof Chat, Office Hours, App Mail & Document Requests State
+    let profChats = {
+      'Prof. Patrick Mugisha': [
+        { from: 'prof', text: 'Hi Aline, remember Room B12 is set for today’s SQL lab.', time: '08:05 AM' },
+        { from: 'student', text: 'Thank you Prof! Should we bring our laptops?', time: '08:08 AM' }
+      ],
+      'Dr. Grace Uwimana': [
+        { from: 'prof', text: 'Lecture slides for OOP interfaces are uploaded.', time: 'Yesterday' }
+      ],
+      'Dr. Jean-Paul Habimana': [
+        { from: 'prof', text: 'Graph theory quiz starts at 9:00 AM in Auditorium C.', time: 'Yesterday' }
+      ]
+    };
+
+    const officeHourSlots = [
+      { id: 'oh-1', prof: 'Prof. Patrick Mugisha', dayTime: 'Today • 15:00 - 15:15', location: 'ICT Block Office 204' },
+      { id: 'oh-2', prof: 'Dr. Grace Uwimana', dayTime: 'Mon, Nov 23 • 10:30 - 10:45', location: 'Google Meet' },
+      { id: 'oh-3', prof: 'Dr. Jean-Paul Habimana', dayTime: 'Tue, Nov 24 • 13:30 - 13:45', location: 'Faculty Lounge B' }
+    ];
+    let bookedOfficeHours = [];
+
+    let appMailInbox = [
       {
-        id: 'n1',
-        title: 'Urgent Memo: Exam Clearance Deadline',
-        body: 'Office of the Registrar posted: Exam Clearance & Permit Verification Deadline: Nov 20.',
-        time: '25m ago',
+        id: 'mail-1',
+        from: 'finance@unisync.rw',
+        subject: 'Semester 1 Fee Statement & Balance Notice',
+        preview: 'Your current balance is 150,000 RWF. Pay via USSD *182*8*1*204910*0842# before 5:00 PM today.',
+        time: '08:15 AM',
         unread: true
       },
       {
-        id: 'n2',
-        title: 'Room Moved: CSC 204',
-        body: 'Prof. Mugisha moved Database Systems to Room B12 (08:30 - 10:30).',
-        time: '40m ago',
-        unread: true
-      },
-      {
-        id: 'n3',
-        title: 'Assignment Due Tomorrow: CSC 204',
-        body: 'Lab 2: ER Diagram & SQL Queries (Synced with your Gmail).',
-        time: '2h ago',
-        unread: true
-      },
-      {
-        id: 'n4',
-        title: 'Missed Quiz Alert: CSC 212',
-        body: 'You missed Quiz 1 on Nov 14. Request a make-up in Tasks.',
+        id: 'mail-2',
+        from: 'patrick.mugisha@unisync.rw',
+        subject: 'CSC 204 Lab 2 Guidelines',
+        preview: 'Submit your ER diagram PDF or Drive link in the Tasks tab before Monday at 11:59 PM.',
         time: 'Yesterday',
         unread: true
+      },
+      {
+        id: 'mail-3',
+        from: 'registrar@unisync.rw',
+        subject: 'Welcome to UniSync Student Portal',
+        preview: 'Your Student ID 2026-0842 is active for digital permits, results, and document requests.',
+        time: 'Nov 10',
+        unread: false
+      }
+    ];
+
+    let documentRequests = [
+      {
+        id: 'doc-101',
+        docType: 'Tuition Payslip / Fee Statement',
+        fee: 0,
+        note: 'Semester 1 Statement',
+        status: 'Ready',
+        date: 'Nov 15, 2026'
       }
     ];
 
     // =========================================================
-    // INITIALIZATION
+    // LOGIN & LOGOUT HANDLERS
+    // =========================================================
+    function fillStudentDemo() {
+      document.getElementById('student-login-user').value = '2026-0842';
+      document.getElementById('student-login-pass').value = 'Student@2026';
+      document.getElementById('student-login-error').classList.add('hidden');
+    }
+
+    function handleStudentLogin(e) {
+      e.preventDefault();
+      const userVal = document.getElementById('student-login-user').value.trim().toLowerCase();
+      const passVal = document.getElementById('student-login-pass').value;
+      const errEl = document.getElementById('student-login-error');
+
+      const match = AUTH_USERS.students.find(s => s.ids.includes(userVal) && s.password === passVal);
+      if (!match) {
+        errEl.textContent = 'Invalid Student ID/username or password. Try 2026-0842 / Student@2026.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+
+      errEl.classList.add('hidden');
+      currentStudentSession = match;
+      document.getElementById('student-login-screen').classList.add('hidden');
+      document.getElementById('student-authenticated-app').classList.remove('hidden');
+      document.getElementById('student-header-name').textContent = match.name;
+      document.getElementById('student-header-id').textContent = match.code;
+      renderAllViews();
+      showToast(`Welcome, ${match.name}`, `Signed in as ${match.code}.`, 'success');
+    }
+
+    function logoutStudent() {
+      currentStudentSession = null;
+      document.getElementById('student-authenticated-app').classList.add('hidden');
+      document.getElementById('student-login-screen').classList.remove('hidden');
+      document.getElementById('student-login-pass').value = '';
+      lucide.createIcons();
+    }
+
+    function fillBoardDemo(role) {
+      const errEl = document.getElementById('board-login-error');
+      errEl.classList.add('hidden');
+      if (role === 'lecturer') {
+        document.getElementById('board-login-user').value = 'patrick.mugisha';
+        document.getElementById('board-login-pass').value = 'Lecturer@2026';
+      } else {
+        document.getElementById('board-login-user').value = 'registrar.admin';
+        document.getElementById('board-login-pass').value = 'Board@2026';
+      }
+    }
+
+    function handleBoardLogin(e) {
+      e.preventDefault();
+      const userVal = document.getElementById('board-login-user').value.trim().toLowerCase();
+      const passVal = document.getElementById('board-login-pass').value;
+      const errEl = document.getElementById('board-login-error');
+
+      const staff = AUTH_USERS.staff.find(u => u.username === userVal && u.password === passVal);
+      if (!staff) {
+        errEl.textContent = 'Invalid staff credentials. Use patrick.mugisha / Lecturer@2026 or registrar.admin / Board@2026.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+
+      errEl.classList.add('hidden');
+      currentBoardSession = staff;
+      document.getElementById('board-login-screen').classList.add('hidden');
+      document.getElementById('board-authenticated-app').classList.remove('hidden');
+      document.getElementById('board-active-user-label').textContent = staff.displayName;
+      populateBoardDropdowns();
+      renderBoardPanels();
+      lucide.createIcons();
+    }
+
+    function logoutBoard() {
+      currentBoardSession = null;
+      document.getElementById('board-authenticated-app').classList.add('hidden');
+      document.getElementById('board-login-screen').classList.remove('hidden');
+      document.getElementById('board-login-pass').value = '';
+      lucide.createIcons();
+    }
+
+    // =========================================================
+    // INITIALIZATION & RENDERING
     // =========================================================
     window.addEventListener('DOMContentLoaded', () => {
       renderAllViews();
-      populateBoardDropdowns();
       lucide.createIcons();
     });
 
@@ -1273,18 +1572,22 @@
       renderScheduleLists();
       renderWeeklyMatrix();
       renderMonthlyCalendar();
+      renderAttendanceWidget();
+      renderResultsTab();
       renderAssignments();
       renderQuizzes();
       renderAnnouncements();
       renderCourseCatalog();
       renderNotifications();
+      renderProfChat();
+      renderOfficeHours();
+      renderAppMail();
+      updateDocFeePreview();
+      renderDocumentRequests();
       renderBoardPanels();
       updateClearanceUI();
     }
 
-    // =========================================================
-    // DUAL PORTAL SWITCHER (student.unisync.rw <-> board.unisync.rw)
-    // =========================================================
     function switchPortal(portal) {
       currentPortal = portal;
       const studentEl = document.getElementById('portal-student');
@@ -1304,28 +1607,45 @@
         boardEl.classList.remove('hidden');
         btnBoard.className = 'relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white shadow-sm transition-all';
         btnStudent.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all';
-        renderBoardPanels();
+        if (currentBoardSession) {
+          populateBoardDropdowns();
+          renderBoardPanels();
+        }
       }
       lucide.createIcons();
     }
 
-    // =========================================================
-    // STUDENT 5-TAB NAVIGATION & TIMETABLE SUB-MODES
-    // =========================================================
     function switchStudentTab(tab) {
       currentStudentTab = tab;
-      ['home', 'timetable', 'tasks', 'notices', 'clearance'].forEach(t => {
+      ['home', 'timetable', 'results', 'tasks', 'clearance', 'hub'].forEach(t => {
         const panel = document.getElementById(`tab-${t}`);
+        if (panel) panel.classList.toggle('hidden', t !== tab);
         const navBtn = document.getElementById(`nav-${t}`);
-        if (t === tab) {
-          panel.classList.remove('hidden');
-          navBtn.className = 'relative flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-brand-600 dark:text-brand-400 bg-brand-50/80 dark:bg-brand-950/60 transition';
-        } else {
-          panel.classList.add('hidden');
-          navBtn.className = 'relative flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
+        if (navBtn) {
+          if (t === tab) {
+            navBtn.className = 'relative flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-brand-600 dark:text-brand-400 bg-brand-50/80 dark:bg-brand-950/60 transition';
+          } else {
+            navBtn.className = 'relative flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-2xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
+          }
         }
       });
       document.getElementById('student-scroll-area').scrollTop = 0;
+      lucide.createIcons();
+    }
+
+    function switchHubSubTab(subTab) {
+      currentHubSubTab = subTab;
+      ['chat', 'hours', 'mail', 'docs'].forEach(st => {
+        const btn = document.getElementById(`hub-tab-${st}`);
+        const panel = document.getElementById(`hub-panel-${st}`);
+        if (st === subTab) {
+          btn.className = 'py-2 rounded-xl bg-white dark:bg-slate-700 text-brand-600 dark:text-white shadow-xs';
+          panel.classList.remove('hidden');
+        } else {
+          btn.className = 'py-2 rounded-xl text-slate-600 dark:text-slate-400';
+          panel.classList.add('hidden');
+        }
+      });
       lucide.createIcons();
     }
 
@@ -1346,7 +1666,334 @@
     }
 
     // =========================================================
-    // RENDER SCHEDULES (TODAY, WEEKLY MATRIX & MONTHLY CALENDAR)
+    // PROF CHAT, OFFICE HOURS, APP MAIL & DOCUMENT REQUESTS
+    // =========================================================
+    function renderProfChat() {
+      const prof = document.getElementById('chat-prof-select').value;
+      const box = document.getElementById('chat-messages-box');
+      const msgs = profChats[prof] || [];
+      box.innerHTML = msgs.map(m => `
+        <div class="flex flex-col ${m.from === 'student' ? 'items-end' : 'items-start'}">
+          <div class="max-w-[85%] px-3 py-2 rounded-2xl text-xs ${
+            m.from === 'student'
+              ? 'bg-brand-600 text-white rounded-br-sm'
+              : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-bl-sm'
+          }">
+            <p>${m.text}</p>
+          </div>
+          <span class="text-[9px] text-slate-400 mt-0.5 px-1">${m.from === 'student' ? 'You' : prof} • ${m.time}</span>
+        </div>
+      `).join('');
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function handleSendProfMessage(e) {
+      e.preventDefault();
+      const prof = document.getElementById('chat-prof-select').value;
+      const input = document.getElementById('chat-message-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      if (!profChats[prof]) profChats[prof] = [];
+      profChats[prof].push({ from: 'student', text, time: 'Just now' });
+      input.value = '';
+      renderProfChat();
+
+      setTimeout(() => {
+        profChats[prof].push({
+          from: 'prof',
+          text: `Received your message, Aline. Let's review it during class or office hours.`,
+          time: 'Just now'
+        });
+        renderProfChat();
+      }, 600);
+    }
+
+    function renderOfficeHours() {
+      const slotsBox = document.getElementById('office-hours-slots');
+      slotsBox.innerHTML = officeHourSlots.map(slot => {
+        const alreadyBooked = bookedOfficeHours.some(b => b.id === slot.id);
+        return `
+          <div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-700 flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-bold">${slot.prof}</p>
+              <p class="text-[11px] text-slate-500">${slot.dayTime} • ${slot.location}</p>
+            </div>
+            <button type="button" onclick="bookOfficeHour('${slot.id}')" ${alreadyBooked ? 'disabled' : ''} class="px-2.5 py-1.5 rounded-xl text-[11px] font-bold ${
+              alreadyBooked ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-brand-600 hover:bg-brand-700 text-white'
+            }">
+              ${alreadyBooked ? 'Booked ✓' : 'Book Slot'}
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      const bookedBox = document.getElementById('booked-office-hours-list');
+      if (bookedOfficeHours.length === 0) {
+        bookedBox.innerHTML = `<p class="text-[11px] text-slate-400">No office hour slots booked yet.</p>`;
+      } else {
+        bookedBox.innerHTML = bookedOfficeHours.map(b => `
+          <div class="p-2 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/40 flex items-center justify-between">
+            <span class="font-bold text-emerald-800 dark:text-emerald-200">${b.prof}</span>
+            <span class="text-[11px] text-slate-600 dark:text-slate-300">${b.dayTime}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    function bookOfficeHour(slotId) {
+      const slot = officeHourSlots.find(s => s.id === slotId);
+      if (!slot || bookedOfficeHours.some(b => b.id === slotId)) return;
+      bookedOfficeHours.push(slot);
+      appMailInbox.unshift({
+        id: 'mail-' + Date.now(),
+        from: 'scheduling@unisync.rw',
+        subject: `Office Hours Confirmed: ${slot.prof}`,
+        preview: `Your slot on ${slot.dayTime} (${slot.location}) is confirmed.`,
+        time: 'Just now',
+        unread: true
+      });
+      renderOfficeHours();
+      renderAppMail();
+      showToast('Office Hours Booked', `${slot.prof} • ${slot.dayTime}`, 'success');
+    }
+
+    function renderAppMail() {
+      const list = document.getElementById('app-mail-list');
+      const unreadCount = appMailInbox.filter(m => m.unread).length;
+      const badge = document.getElementById('hub-mail-badge');
+      if (badge) {
+        badge.textContent = unreadCount;
+        badge.classList.toggle('hidden', unreadCount === 0);
+      }
+
+      list.innerHTML = appMailInbox.map(m => `
+        <div onclick="markSingleAppMailRead('${m.id}')" class="cursor-pointer p-3 rounded-2xl border ${
+          m.unread ? 'bg-brand-50/50 dark:bg-brand-950/30 border-brand-300 dark:border-brand-700' : 'bg-slate-50 dark:bg-slate-900/70 border-slate-200 dark:border-slate-700'
+        } space-y-1">
+          <div class="flex items-center justify-between gap-2 text-[10px]">
+            <span class="font-mono font-bold text-brand-700 dark:text-brand-300 truncate">${m.from}</span>
+            <span class="text-slate-400 shrink-0">${m.time}</span>
+          </div>
+          <p class="text-xs font-bold flex items-center gap-1.5">
+            ${m.unread ? '<span class="w-1.5 h-1.5 rounded-full bg-brand-600 shrink-0"></span>' : ''}
+            <span>${m.subject}</span>
+          </p>
+          <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-snug">${m.preview}</p>
+        </div>
+      `).join('');
+    }
+
+    function markSingleAppMailRead(id) {
+      const item = appMailInbox.find(m => m.id === id);
+      if (item && item.unread) {
+        item.unread = false;
+        renderAppMail();
+      }
+    }
+
+    function markAllAppMailRead() {
+      appMailInbox.forEach(m => m.unread = false);
+      renderAppMail();
+    }
+
+    function updateDocFeePreview() {
+      const select = document.getElementById('doc-type-select');
+      const opt = select.options[select.selectedIndex];
+      const fee = Number(opt.dataset.fee || 0);
+      document.getElementById('doc-fee-display').textContent = fee === 0 ? 'Free (0 RWF)' : `${fee.toLocaleString()} RWF`;
+    }
+
+    function handleSubmitDocumentRequest(e) {
+      e.preventDefault();
+      const select = document.getElementById('doc-type-select');
+      const opt = select.options[select.selectedIndex];
+      const docType = select.value;
+      const fee = Number(opt.dataset.fee || 0);
+      const note = document.getElementById('doc-note-input').value.trim() || 'Standard request';
+
+      documentRequests.unshift({
+        id: 'doc-' + Date.now(),
+        docType,
+        fee,
+        note,
+        status: fee === 0 ? 'Ready' : 'Pending Fee',
+        date: 'Nov 20, 2026'
+      });
+      document.getElementById('doc-note-input').value = '';
+      renderDocumentRequests();
+      showToast('Document Requested', `${docType} (${fee === 0 ? 'Free' : fee.toLocaleString() + ' RWF'}) logged.`, 'info');
+    }
+
+    function renderDocumentRequests() {
+      const list = document.getElementById('doc-requests-list');
+      list.innerHTML = documentRequests.map(d => `
+        <div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-700 flex items-center justify-between gap-2 text-xs">
+          <div>
+            <p class="font-bold">${d.docType}</p>
+            <p class="text-[10px] text-slate-500">Fee: ${d.fee === 0 ? 'Free (0 RWF)' : `${d.fee.toLocaleString()} RWF`} • ${d.note} • ${d.date}</p>
+          </div>
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded-lg ${
+            d.status === 'Ready' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300'
+          }">${d.status}</span>
+        </div>
+      `).join('');
+    }
+
+    // =========================================================
+    // ATTENDANCE CHECK-IN & TRACKING
+    // =========================================================
+    function rotateAttendancePin() {
+      currentAttendancePin = String(Math.floor(1000 + Math.random() * 9000));
+      courses.forEach(c => { c.checkedInToday = false; });
+      document.getElementById('board-current-pin').textContent = currentAttendancePin;
+      notifications.unshift({
+        id: 'n-' + Date.now(),
+        title: 'New Attendance PIN Generated',
+        body: `Lecturer opened check-in with PIN ${currentAttendancePin}.`,
+        time: 'Just now',
+        unread: true
+      });
+      renderAttendanceWidget();
+      renderNotifications();
+      triggerBoardFeedback(`New Attendance PIN active: ${currentAttendancePin}`);
+    }
+
+    function handleStudentAttendanceCheckIn(e) {
+      e.preventDefault();
+      const courseId = document.getElementById('att-course-select').value;
+      const pinInput = document.getElementById('att-pin-input').value.trim();
+      const course = courses.find(c => c.id === courseId);
+      if (!course) return;
+
+      if (pinInput !== currentAttendancePin) {
+        showToast('Invalid PIN', `Incorrect PIN. Ask lecturer for the active PIN (Demo PIN: ${currentAttendancePin}).`, 'danger');
+        return;
+      }
+
+      if (!course.checkedInToday) {
+        course.checkedInToday = true;
+        course.attendedClasses += 1;
+        course.totalClasses += 1;
+      }
+      document.getElementById('att-pin-input').value = '';
+      renderAttendanceWidget();
+      showToast('Attendance Recorded', `Marked PRESENT for ${course.code} (${course.name}).`, 'success');
+    }
+
+    function renderAttendanceWidget() {
+      const enrolled = courses.filter(c => c.enrolled);
+      const selectEl = document.getElementById('att-course-select');
+      if (selectEl) {
+        selectEl.innerHTML = enrolled.map(c => `<option value="${c.id}">${c.code}</option>`).join('');
+      }
+
+      const avgPct = enrolled.length
+        ? Math.round(enrolled.reduce((sum, c) => sum + (c.attendedClasses / c.totalClasses) * 100, 0) / enrolled.length)
+        : 100;
+
+      document.getElementById('attendance-overall-badge').textContent = `${avgPct}% Avg`;
+      document.getElementById('home-attendance-pct').textContent = `${avgPct}% Present`;
+
+      const breakdownEl = document.getElementById('attendance-course-breakdown');
+      if (breakdownEl) {
+        breakdownEl.innerHTML = enrolled.map(c => {
+          const pct = Math.round((c.attendedClasses / c.totalClasses) * 100);
+          return `
+            <div class="p-2 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/70 dark:border-slate-700 text-center">
+              <p class="text-[10px] font-extrabold">${c.code}</p>
+              <p class="text-xs font-bold text-emerald-600 dark:text-emerald-400">${pct}%</p>
+              <p class="text-[9px] text-slate-400">${c.checkedInToday ? 'Checked In ✓' : `${c.attendedClasses}/${c.totalClasses}`}</p>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    // =========================================================
+    // RESULTS & GRADES TAB
+    // =========================================================
+    function computeGradeInfo(totalScore) {
+      if (totalScore >= 80) return { grade: 'A', gpa: 4.0, badge: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' };
+      if (totalScore >= 70) return { grade: 'B+', gpa: 3.5, badge: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' };
+      if (totalScore >= 60) return { grade: 'B', gpa: 3.0, badge: 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300' };
+      return { grade: 'C', gpa: 2.0, badge: 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300' };
+    }
+
+    function renderResultsTab() {
+      const enrolled = courses.filter(c => c.enrolled);
+      const container = document.getElementById('results-modules-list');
+      if (!container) return;
+
+      let totalGpaPoints = 0;
+      let totalCredits = 0;
+
+      container.innerHTML = enrolled.map(c => {
+        const total = c.catScore + c.examScore;
+        const info = computeGradeInfo(total);
+        totalGpaPoints += info.gpa * c.credits;
+        totalCredits += c.credits;
+
+        return `
+          <div class="rounded-3xl p-4 bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/70 space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700">${c.code} • ${c.credits} Cr</span>
+                <h4 class="font-display font-bold text-sm mt-1">${c.name}</h4>
+              </div>
+              <span class="px-2.5 py-1 rounded-xl font-display font-extrabold text-xs ${info.badge}">
+                ${total}% (${info.grade})
+              </span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 text-center pt-1">
+              <div class="p-2 rounded-2xl bg-slate-50 dark:bg-slate-900/70">
+                <span class="text-[10px] text-slate-500 block">Quiz / CAT</span>
+                <span class="text-xs font-extrabold">${c.catScore} / 40</span>
+              </div>
+              <div class="p-2 rounded-2xl bg-slate-50 dark:bg-slate-900/70">
+                <span class="text-[10px] text-slate-500 block">Final Exam</span>
+                <span class="text-xs font-extrabold">${c.examScore} / 60</span>
+              </div>
+              <div class="p-2 rounded-2xl bg-slate-50 dark:bg-slate-900/70">
+                <span class="text-[10px] text-slate-500 block">Grade Point</span>
+                <span class="text-xs font-extrabold text-brand-600 dark:text-brand-400">${info.gpa.toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const gpa = totalCredits > 0 ? (totalGpaPoints / totalCredits).toFixed(2) : '0.00';
+      document.getElementById('results-gpa-display').textContent = gpa;
+      document.getElementById('home-gpa-val').textContent = `${gpa} / 4.0`;
+    }
+
+    function handleUpdateMarks(e) {
+      e.preventDefault();
+      const id = document.getElementById('marks-course-select').value;
+      const cat = Math.min(40, Math.max(0, Number(document.getElementById('marks-cat-input').value)));
+      const exam = Math.min(60, Math.max(0, Number(document.getElementById('marks-exam-input').value)));
+      const c = courses.find(item => item.id === id);
+      if (!c) return;
+
+      c.catScore = cat;
+      c.examScore = exam;
+      c.enrolled = true;
+      renderResultsTab();
+      notifications.unshift({
+        id: 'n-' + Date.now(),
+        title: `Marks Published: ${c.code}`,
+        body: `Quiz/CAT: ${cat}/40 • Exam: ${exam}/60 (Total: ${cat + exam}%).`,
+        time: 'Just now',
+        unread: true
+      });
+      renderNotifications();
+      triggerBoardFeedback(`Updated ${c.code} marks (${cat + exam}%) for Aline Uwase!`);
+      showToast(`${c.code} Marks Updated`, `Total: ${cat + exam}% — Check Results tab.`, 'success');
+    }
+
+    // =========================================================
+    // TIMETABLE, CALENDAR, NOTICES, TASKS & CLEARANCE
     // =========================================================
     function getStatusBadgeHTML(status) {
       switch (status) {
@@ -1377,7 +2024,6 @@
           No modules registered. Open the Clearance tab to add courses.
         </div>`;
       }
-
       return enrolledCourses.map(c => {
         const isCanceled = c.status === 'Canceled';
         return `
@@ -1402,7 +2048,7 @@
                 </a>
               ` : `
                 <span class="text-[10px] text-slate-400 flex items-center gap-1">
-                  <i data-lucide="${c.reminder30m ? 'bell-ring' : 'bell-off'}" class="w-3 h-3 ${c.reminder30m ? 'text-brand-500' : ''}"></i>
+                  <i data-lucide="bell-ring" class="w-3 h-3 ${c.reminder30m ? 'text-brand-500' : ''}"></i>
                   ${c.reminder30m ? '30m alert' : 'Details'}
                 </span>
               `}
@@ -1426,66 +2072,38 @@
       const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
       const enrolled = courses.filter(c => c.enrolled);
 
-      const rowsHTML = timeSlots.map(slot => {
+      document.getElementById('weekly-matrix-body').innerHTML = timeSlots.map(slot => {
         const cells = days.map(day => {
           const match = enrolled.find(c => c.weeklySlots.some(s => s.day === day && s.slot === slot));
-          if (!match) {
-            return `<div class="p-1.5 rounded-xl bg-slate-50/70 dark:bg-slate-900/40 text-slate-300 dark:text-slate-700 flex items-center justify-center">—</div>`;
-          }
+          if (!match) return `<div class="p-1.5 rounded-xl bg-slate-50/70 dark:bg-slate-900/40 text-slate-300 dark:text-slate-700 flex items-center justify-center">—</div>`;
           const badgeColor = match.status === 'Canceled'
             ? 'bg-rose-50 dark:bg-rose-950/60 border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300'
             : match.meetingLink
               ? 'bg-indigo-50 dark:bg-indigo-950/70 border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300'
               : 'bg-emerald-50/80 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200';
-
-          return `
-            <div onclick="openClassDetailModal('${match.id}')" class="cursor-pointer p-1.5 rounded-xl border ${badgeColor} hover:scale-[1.02] transition text-left">
-              <p class="font-extrabold text-[10px] leading-tight">${match.code}</p>
-              <p class="text-[9px] opacity-85 truncate mt-0.5">${match.room}</p>
-            </div>
-          `;
+          return `<div onclick="openClassDetailModal('${match.id}')" class="cursor-pointer p-1.5 rounded-xl border ${badgeColor} text-left"><p class="font-extrabold text-[10px] leading-tight">${match.code}</p><p class="text-[9px] opacity-85 truncate mt-0.5">${match.room}</p></div>`;
         }).join('');
-
-        return `
-          <div class="grid grid-cols-6 gap-1.5 py-2 items-stretch">
-            <div class="text-[10px] font-bold text-slate-500 dark:text-slate-400 flex items-center pl-1">${slot.split(' - ')[0]}</div>
-            ${cells}
-          </div>
-        `;
+        return `<div class="grid grid-cols-6 gap-1.5 py-2 items-stretch"><div class="text-[10px] font-bold text-slate-500 flex items-center pl-1">${slot.split(' - ')[0]}</div>${cells}</div>`;
       }).join('');
-
-      document.getElementById('weekly-matrix-body').innerHTML = rowsHTML;
     }
 
     function renderMonthlyCalendar() {
       const grid = document.getElementById('monthly-calendar-grid');
-      // November 2026 has 30 days, starting on Sunday (offset 0)
       let cellsHTML = '';
       for (let day = 1; day <= 30; day++) {
         const events = novemberEvents[day] || [];
         const isSelected = day === selectedCalendarDay;
-        const isToday = day === 17;
-
+        const isToday = day === 20;
         const dotsHTML = events.map(ev => {
-          const color = ev.type === 'quiz' ? 'bg-amber-500'
-            : ev.type === 'due' ? 'bg-indigo-500'
-            : ev.type === 'exam' ? 'bg-rose-500'
-            : 'bg-emerald-500';
+          const color = ev.type === 'quiz' ? 'bg-amber-500' : ev.type === 'due' ? 'bg-indigo-500' : ev.type === 'exam' ? 'bg-rose-500' : 'bg-emerald-500';
           return `<span class="w-1.5 h-1.5 rounded-full ${color}"></span>`;
         }).join('');
-
         cellsHTML += `
           <button onclick="selectCalendarDay(${day})" class="py-2 rounded-xl flex flex-col items-center justify-center gap-1 transition ${
-            isSelected
-              ? 'bg-brand-600 text-white font-extrabold shadow-xs'
-              : isToday
-                ? 'bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 font-bold border border-brand-300 dark:border-brand-700'
-                : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium'
-          }">
-            <span class="text-xs leading-none">${day}</span>
-            <div class="flex items-center gap-0.5 h-1.5">${dotsHTML}</div>
-          </button>
-        `;
+            isSelected ? 'bg-brand-600 text-white font-extrabold shadow-xs'
+              : isToday ? 'bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 font-bold border border-brand-300 dark:border-brand-700'
+              : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium'
+          }"><span class="text-xs leading-none">${day}</span><div class="flex items-center gap-0.5 h-1.5">${dotsHTML}</div></button>`;
       }
       grid.innerHTML = cellsHTML;
       renderSelectedDayDetail();
@@ -1499,41 +2117,15 @@
     function renderSelectedDayDetail() {
       const box = document.getElementById('monthly-day-detail');
       const events = novemberEvents[selectedCalendarDay] || [];
-      const header = `<div class="flex items-center justify-between">
-        <h4 class="font-display font-bold text-xs">Nov ${selectedCalendarDay}, 2026 Schedule & Deadlines</h4>
-        ${selectedCalendarDay === 17 ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300">Today</span>' : ''}
-      </div>`;
-
+      const header = `<div class="flex items-center justify-between"><h4 class="font-display font-bold text-xs">Nov ${selectedCalendarDay}, 2026 Events</h4>${selectedCalendarDay === 20 ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300">Today</span>' : ''}</div>`;
       if (events.length === 0) {
-        box.innerHTML = `${header}<p class="text-xs text-slate-500 dark:text-slate-400">Regular weekday lectures. No quizzes or exam deadlines on this date.</p>`;
+        box.innerHTML = `${header}<p class="text-xs text-slate-500">Regular weekday lectures. No special deadlines logged.</p>`;
         return;
       }
-
-      const itemsHTML = events.map(ev => {
-        const badgeStyle = ev.type === 'quiz' ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
-          : ev.type === 'due' ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300'
-          : ev.type === 'exam' ? 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300'
-          : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300';
-
-        return `
-          <div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-900/70 flex items-center justify-between gap-2">
-            <div>
-              <p class="text-xs font-bold">${ev.title}</p>
-              <p class="text-[11px] text-slate-500">${ev.meta}</p>
-            </div>
-            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-lg ${badgeStyle}">${ev.type}</span>
-          </div>
-        `;
-      }).join('');
-
-      box.innerHTML = `${header}<div class="space-y-2 pt-1">${itemsHTML}</div>`;
+      box.innerHTML = `${header}<div class="space-y-2 pt-1">${events.map(ev => `<div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-900/70 flex items-center justify-between gap-2"><div><p class="text-xs font-bold">${ev.title}</p><p class="text-[11px] text-slate-500">${ev.meta}</p></div><span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-lg bg-brand-100 text-brand-800 dark:bg-brand-950 dark:text-brand-300">${ev.type}</span></div>`).join('')}</div>`;
     }
 
-    // =========================================================
-    // RENDER ANNOUNCEMENTS (HOME PINNED + FULL NOTICES TAB)
-    // =========================================================
     function renderAnnouncements() {
-      // Pinned preview on Home tab
       const latest = announcements[0];
       const pinnedBox = document.getElementById('home-pinned-announcement');
       if (latest && pinnedBox) {
@@ -1549,37 +2141,20 @@
         `;
       }
 
-      // Full Notices Feed
-      const filtered = currentNoticeCategory === 'All'
-        ? announcements
-        : announcements.filter(a => a.category === currentNoticeCategory);
-
+      const filtered = currentNoticeCategory === 'All' ? announcements : announcements.filter(a => a.category === currentNoticeCategory);
       const feedList = document.getElementById('notices-feed-list');
-      feedList.innerHTML = filtered.map(a => {
-        const tagStyle = a.category === 'Urgent'
-          ? 'bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300'
-          : a.category === 'Academic'
-            ? 'bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300'
-            : 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300';
-
-        return `
-          <div onclick="markSingleNoticeRead('${a.id}')" class="cursor-pointer rounded-3xl p-4 bg-white dark:bg-slate-800/90 border ${a.unread ? 'border-brand-400 dark:border-brand-600' : 'border-slate-200/80 dark:border-slate-700/70'} shadow-xs space-y-2 transition">
+      if (feedList) {
+        feedList.innerHTML = filtered.map(a => `
+          <div onclick="markSingleNoticeRead('${a.id}')" class="cursor-pointer rounded-2xl p-3 bg-slate-50 dark:bg-slate-900/80 border ${a.unread ? 'border-brand-400' : 'border-slate-200 dark:border-slate-700'} space-y-1">
             <div class="flex items-center justify-between gap-2">
-              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-lg ${tagStyle}">${a.category}</span>
-              <div class="flex items-center gap-1.5">
-                ${a.unread ? '<span class="w-2 h-2 rounded-full bg-brand-600"></span>' : ''}
-                <span class="text-[10px] text-slate-400">${a.time}</span>
-              </div>
+              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300">${a.category}</span>
+              <span class="text-[10px] text-slate-400">${a.time}</span>
             </div>
-            <h4 class="font-display font-bold text-sm leading-snug">${a.title}</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${a.body}</p>
-            <p class="text-[10px] font-semibold text-slate-400 pt-1 border-t border-slate-100 dark:border-slate-700/60">
-              Issued by: ${a.sender}
-            </p>
+            <h4 class="font-display font-bold text-xs">${a.title}</h4>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300">${a.body}</p>
           </div>
-        `;
-      }).join('');
-
+        `).join('');
+      }
       const unreadCount = announcements.filter(a => a.unread).length;
       document.getElementById('nav-notices-dot').classList.toggle('hidden', unreadCount === 0);
       lucide.createIcons();
@@ -1587,51 +2162,31 @@
 
     function filterAnnouncements(category) {
       currentNoticeCategory = category;
-      document.querySelectorAll('.notice-filter-btn').forEach(btn => {
-        if (btn.dataset.cat === category) {
-          btn.className = 'notice-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 dark:bg-brand-600 text-white shrink-0';
-        } else {
-          btn.className = 'notice-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shrink-0';
-        }
-      });
       renderAnnouncements();
     }
-
     function markSingleNoticeRead(id) {
       const item = announcements.find(a => a.id === id);
-      if (item && item.unread) {
-        item.unread = false;
-        renderAnnouncements();
-      }
+      if (item) { item.unread = false; renderAnnouncements(); }
     }
-
     function markAllNoticesRead() {
       announcements.forEach(a => a.unread = false);
       renderAnnouncements();
     }
 
-    // =========================================================
-    // TASKS, QUIZZES & COURSE CATALOG
-    // =========================================================
     function renderAssignments() {
       const container = document.getElementById('assignments-list');
       const pending = assignments.filter(a => !a.submitted).length;
       document.getElementById('assignment-count-pill').textContent = `${pending} Pending`;
-
       container.innerHTML = assignments.map(a => `
         <div class="rounded-3xl p-3.5 bg-white dark:bg-slate-800/90 border ${a.submitted ? 'border-emerald-200 dark:border-emerald-800/50' : 'border-indigo-200 dark:border-indigo-800/60'} space-y-2">
           <div class="flex items-center justify-between gap-2">
             <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">${a.courseCode}</span>
-            ${a.submitted
-              ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Submitted</span>`
-              : `<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">Due: ${a.due}</span>`}
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${a.submitted ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}">${a.submitted ? 'Submitted' : `Due: ${a.due}`}</span>
           </div>
           <h4 class="font-display font-bold text-sm">${a.title}</h4>
           <div class="pt-2 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between gap-2">
-            ${a.submitted
-              ? `<span class="text-[11px] font-medium text-emerald-600 dark:text-emerald-400 truncate">${a.submittedRef}</span>`
-              : `<span class="text-[11px] text-slate-400">PDF / Drive + Gmail Receipt</span>
-                 <button onclick="openAssignmentModal('${a.id}')" class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-[11px] font-bold">Submit</button>`}
+            ${a.submitted ? `<span class="text-[11px] font-medium text-emerald-600 truncate">${a.submittedRef}</span>`
+              : `<span class="text-[11px] text-slate-400">PDF / Drive + Gmail Receipt</span><button onclick="openAssignmentModal('${a.id}')" class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-[11px] font-bold">Submit</button>`}
           </div>
         </div>
       `).join('');
@@ -1646,20 +2201,13 @@
       document.getElementById('assign-modal-due').textContent = `Deadline: ${a.due}`;
       document.getElementById('assignment-modal').classList.remove('hidden');
     }
-
-    function closeAssignmentModal() {
-      document.getElementById('assignment-modal').classList.add('hidden');
-    }
-
+    function closeAssignmentModal() { document.getElementById('assignment-modal').classList.add('hidden'); }
     function submitStudentAssignment(e) {
       e.preventDefault();
       const a = assignments.find(item => item.id === selectedAssignmentId);
       if (!a) return;
-      const fileInput = document.getElementById('assign-file-input');
-      const driveLink = document.getElementById('assign-drive-input').value.trim();
-      const label = fileInput.files && fileInput.files[0] ? fileInput.files[0].name : (driveLink ? 'Drive Link' : 'Lab2_Uwase.pdf');
       a.submitted = true;
-      a.submittedRef = `${label} • Gmail Receipt Sent`;
+      a.submittedRef = `Submission_${a.courseCode.replace(/\s+/g, '')}.pdf • Gmail Receipt Sent`;
       closeAssignmentModal();
       renderAssignments();
       showToast(`Submitted ${a.courseCode}`, 'Receipt sent to your Gmail & recorded for lecturer.', 'success');
@@ -1669,54 +2217,31 @@
       const container = document.getElementById('quizzes-list');
       const upcoming = quizzes.filter(q => q.status === 'upcoming').length;
       document.getElementById('quiz-count-pill').textContent = `${upcoming} Upcoming`;
-
       container.innerHTML = quizzes.map(q => {
         const isMissed = q.status === 'missed';
         return `
-          <div class="rounded-3xl p-3.5 bg-white dark:bg-slate-800/90 border ${isMissed ? 'border-rose-300 dark:border-rose-800 bg-rose-50/30 dark:bg-rose-950/20' : 'border-slate-200/80 dark:border-slate-700/70'} space-y-2">
+          <div class="rounded-3xl p-3.5 bg-white dark:bg-slate-800/90 border ${isMissed ? 'border-rose-300 dark:border-rose-800' : 'border-slate-200/80 dark:border-slate-700/70'} space-y-2">
             <div class="flex items-center justify-between gap-2">
               <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-700">${q.courseCode}</span>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isMissed ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300' : 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300'}">${q.when}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isMissed ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700'}">${q.when}</span>
             </div>
             <h4 class="font-display font-bold text-sm">${q.title}</h4>
-            ${isMissed ? `
-              <div class="pt-2 border-t border-rose-200/60 dark:border-rose-800/40 flex items-center justify-between">
-                <span class="text-[11px] text-rose-600 font-medium">Marked absent</span>
-                ${q.makeupRequested
-                  ? `<span class="text-[11px] font-bold text-emerald-600">Excuse Sent</span>`
-                  : `<button onclick="requestQuizMakeup('${q.id}')" class="px-2.5 py-1 rounded-xl bg-rose-600 text-white text-[11px] font-bold">Request Make-Up</button>`}
-              </div>
-            ` : ''}
           </div>
         `;
       }).join('');
-    }
-
-    function requestQuizMakeup(id) {
-      const q = quizzes.find(item => item.id === id);
-      if (!q) return;
-      q.makeupRequested = true;
-      renderQuizzes();
-      showToast('Make-Up Requested', `Sent excuse request for ${q.courseCode}.`, 'info');
     }
 
     function renderCourseCatalog() {
       const container = document.getElementById('course-catalog-list');
       const totalCredits = courses.filter(c => c.enrolled).reduce((sum, c) => sum + c.credits, 0);
       document.getElementById('credits-counter').textContent = `${totalCredits} / 18 Cr`;
-
       container.innerHTML = courses.map(c => `
         <div class="p-3 rounded-2xl border ${c.enrolled ? 'border-brand-300 dark:border-brand-700 bg-brand-50/40 dark:bg-brand-950/30' : 'border-slate-200 dark:border-slate-700'} flex items-center justify-between gap-2">
           <div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-xs font-extrabold">${c.code}</span>
-              <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-700">${c.credits} Cr</span>
-            </div>
+            <span class="text-xs font-extrabold">${c.code}</span> <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-700">${c.credits} Cr</span>
             <p class="text-xs font-semibold mt-0.5">${c.name}</p>
           </div>
-          <button onclick="toggleCourseEnrollment('${c.id}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${c.enrolled ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300' : 'bg-brand-600 text-white'}">
-            ${c.enrolled ? 'Drop' : '+ Add'}
-          </button>
+          <button onclick="toggleCourseEnrollment('${c.id}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${c.enrolled ? 'bg-rose-100 text-rose-700' : 'bg-brand-600 text-white'}">${c.enrolled ? 'Drop' : '+ Add'}</button>
         </div>
       `).join('');
     }
@@ -1725,15 +2250,10 @@
       const c = courses.find(item => item.id === id);
       if (!c) return;
       c.enrolled = !c.enrolled;
-      renderCourseCatalog();
-      renderScheduleLists();
-      renderWeeklyMatrix();
-      showToast(c.enrolled ? `Added ${c.code}` : `Dropped ${c.code}`, 'Weekly & Today timetables updated live.', 'info');
+      renderAllViews();
+      showToast(c.enrolled ? `Added ${c.code}` : `Dropped ${c.code}`, 'Timetable, attendance & results updated.', 'info');
     }
 
-    // =========================================================
-    // CLEARANCE, USSD / BANK PAYMENTS & BOARD APPROVALS
-    // =========================================================
     function updateClearanceUI() {
       let score = 35;
       if (tuitionStatus === 'cleared') score += 45;
@@ -1741,10 +2261,7 @@
       if (facultyCleared) score += 20;
 
       document.getElementById('clearance-progress-bar').style.width = `${score}%`;
-      document.getElementById('clearance-subtitle').textContent = score === 100
-        ? '100% Verified • Exam Permit Unlocked'
-        : `${score}% Complete • Action needed`;
-
+      document.getElementById('clearance-subtitle').textContent = score === 100 ? '100% Verified • Exam Permit Unlocked' : `${score}% Complete • Action needed`;
       document.getElementById('home-clearance-pct').textContent = score === 100 ? '100% Cleared' : `${score}% Pending`;
       document.getElementById('home-clearance-pct').className = `font-display font-extrabold text-xs block mt-0.5 ${score === 100 ? 'text-emerald-300' : 'text-amber-300'}`;
       document.getElementById('home-clearance-sub').textContent = tuitionStatus === 'cleared' ? 'Permit Ready' : (tuitionStatus === 'pending_review' ? 'Slip in Review' : '150k RWF Due');
@@ -1757,15 +2274,13 @@
       const examSurface = document.getElementById('exam-card-surface');
 
       if (tuitionStatus === 'cleared') {
-        financeCard.className = 'p-3 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/40 flex items-center justify-between gap-2';
+        financeCard.className = 'p-3 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/70 flex items-center justify-between gap-2';
         financeIcon.className = 'w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0';
-        financeDesc.className = 'text-[11px] text-slate-500';
         financeDesc.textContent = '100% Paid • Verified Receipt';
         if (payBtn) payBtn.outerHTML = `<span id="btn-pay-tuition" class="text-xs font-bold text-emerald-600">Cleared</span>`;
       } else if (tuitionStatus === 'pending_review') {
-        financeCard.className = 'p-3 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/50 flex items-center justify-between gap-2';
+        financeCard.className = 'p-3 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 flex items-center justify-between gap-2';
         financeIcon.className = 'w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0';
-        financeDesc.className = 'text-[11px] text-amber-700 dark:text-amber-300 font-semibold';
         financeDesc.textContent = 'Bank slip awaiting Finance approval';
         if (payBtn) payBtn.textContent = 'Pending Review';
       }
@@ -1778,54 +2293,34 @@
       lucide.createIcons();
     }
 
-    function openPaymentModal() {
-      if (tuitionStatus === 'cleared') return;
-      document.getElementById('payment-modal').classList.remove('hidden');
-    }
-    function closePaymentModal() {
-      document.getElementById('payment-modal').classList.add('hidden');
-    }
+    function openPaymentModal() { if (tuitionStatus !== 'cleared') document.getElementById('payment-modal').classList.remove('hidden'); }
+    function closePaymentModal() { document.getElementById('payment-modal').classList.add('hidden'); }
     function switchPayMethod(m) {
       ['ussd', 'urubuto', 'bank'].forEach(tab => {
-        document.getElementById(`pay-tab-${tab}`).className = tab === m
-          ? 'py-2 rounded-xl text-[11px] font-bold bg-white dark:bg-slate-700 text-brand-600 dark:text-white shadow-xs'
-          : 'py-2 rounded-xl text-[11px] font-semibold text-slate-600 dark:text-slate-400';
+        document.getElementById(`pay-tab-${tab}`).className = tab === m ? 'py-2 rounded-xl text-[11px] font-bold bg-white dark:bg-slate-700 text-brand-600 dark:text-white shadow-xs' : 'py-2 rounded-xl text-[11px] font-semibold text-slate-600 dark:text-slate-400';
         document.getElementById(`pay-panel-${tab}`).classList.toggle('hidden', tab !== m);
       });
     }
-
     function simulateInstantMobilePayment(channel) {
       tuitionStatus = 'cleared';
       closePaymentModal();
       updateClearanceUI();
       showToast('Payment Verified!', `150,000 RWF settled via ${channel}.`, 'success');
     }
-
     function submitBankSlipForApproval(e) {
       e.preventDefault();
       const ref = document.getElementById('bank-slip-ref-input').value.trim();
-      if (!ref) return;
       tuitionStatus = 'pending_review';
-      financeQueue.unshift({
-        id: 'pay-' + Date.now(),
-        studentName: 'Aline Uwase',
-        studentId: '2026-0842',
-        method: 'Bank Deposit Slip',
-        reference: ref,
-        amount: '150,000 RWF',
-        isCurrentUser: true,
-        status: 'pending'
-      });
+      financeQueue.unshift({ id: 'pay-' + Date.now(), studentName: 'Aline Uwase', studentId: '2026-0842', method: 'Bank Deposit Slip', reference: ref, amount: '150,000 RWF', isCurrentUser: true, status: 'pending' });
       closePaymentModal();
       updateClearanceUI();
       renderBoardPanels();
       showToast('Slip Submitted', `Ref ${ref} sent to board.unisync.rw Finance queue.`, 'info');
     }
-
     function completeFacultyClearance() {
       if (facultyCleared) return;
       facultyCleared = true;
-      document.getElementById('step-faculty-card').className = 'p-3 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/40 flex items-center justify-between';
+      document.getElementById('step-faculty-card').className = 'p-3 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/70 flex items-center justify-between';
       document.getElementById('step-faculty-icon').className = 'w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0';
       document.getElementById('step-faculty-desc').textContent = 'Units confirmed';
       const btn = document.getElementById('btn-submit-clearance');
@@ -1835,17 +2330,15 @@
     }
 
     // =========================================================
-    // BOARD WEB PORTAL MODULES & ACTIONS
+    // BOARD ACTIONS & RENDERING
     // =========================================================
     function switchBoardModule(mod) {
       ['lecturer', 'announcements', 'finance', 'reception'].forEach(m => {
         document.getElementById(`board-mod-${m}`).classList.toggle('hidden', m !== mod);
         const btn = document.getElementById(`board-nav-${m}`);
-        if (m === mod) {
-          btn.className = 'flex items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold bg-brand-600 text-white shadow-sm text-left transition';
-        } else {
-          btn.className = 'flex items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-slate-300 hover:bg-slate-800 text-left transition';
-        }
+        btn.className = m === mod
+          ? 'flex items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold bg-brand-600 text-white shadow-sm text-left transition'
+          : 'flex items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-slate-300 hover:bg-slate-800 text-left transition';
       });
       renderBoardPanels();
       lucide.createIcons();
@@ -1854,6 +2347,7 @@
     function populateBoardDropdowns() {
       const options = courses.map(c => `<option value="${c.id}">${c.code} — ${c.name}</option>`).join('');
       document.getElementById('lec-course-select').innerHTML = options;
+      document.getElementById('marks-course-select').innerHTML = options;
       document.getElementById('assign-course-select').innerHTML = options;
       document.getElementById('quiz-course-select').innerHTML = options;
       prefillLecturerCourseFields();
@@ -1890,72 +2384,38 @@
       const id = document.getElementById('lec-course-select').value;
       const c = courses.find(item => item.id === id);
       if (!c) return;
-
       c.status = selectedLecStatus;
       c.time = document.getElementById('lec-time-input').value.trim() || c.time;
       c.room = document.getElementById('lec-room-input').value.trim() || c.room;
       c.meetingLink = document.getElementById('lec-link-input').value.trim();
       c.note = document.getElementById('lec-note-input').value.trim();
       c.enrolled = true;
-
-      const title = `${c.code}: ${c.status}`;
-      const body = `${c.room} (${c.time}). ${c.note}`;
-      notifications.unshift({ id: 'n-' + Date.now(), title, body, time: 'Just now', unread: true });
-
       renderScheduleLists();
       renderWeeklyMatrix();
-      renderNotifications();
-      triggerBoardFeedback(`Pushed "${title}" to student.unisync.rw!`);
-      showToast(title, body, c.status === 'Canceled' ? 'danger' : 'warning');
+      triggerBoardFeedback(`Pushed "${c.code}: ${c.status}" to student.unisync.rw!`);
+      showToast(`${c.code}: ${c.status}`, `${c.room} (${c.time})`, 'warning');
     }
 
     function handlePostAssignment(e) {
       e.preventDefault();
-      const id = document.getElementById('assign-course-select').value;
-      const c = courses.find(item => item.id === id);
+      const c = courses.find(item => item.id === document.getElementById('assign-course-select').value);
       const due = document.getElementById('assign-due-input').value.trim();
       const title = document.getElementById('assign-title-input').value.trim();
-
-      assignments.unshift({
-        id: 'a-' + Date.now(),
-        courseCode: c.code,
-        title,
-        due,
-        submitted: false,
-        submittedRef: ''
-      });
-      notifications.unshift({ id: 'n-' + Date.now(), title: `New Assignment: ${c.code}`, body: `${title} (Due ${due})`, time: 'Just now', unread: true });
-
+      assignments.unshift({ id: 'a-' + Date.now(), courseCode: c.code, title, due, submitted: false, submittedRef: '' });
       document.getElementById('assign-title-input').value = '';
       renderAssignments();
-      renderNotifications();
       triggerBoardFeedback(`Published "${title}" to Student App & Gmail!`);
-      showToast(`New Assignment: ${c.code}`, `${title} (Due ${due})`, 'info');
     }
 
     function handlePostQuiz(e) {
       e.preventDefault();
-      const id = document.getElementById('quiz-course-select').value;
-      const c = courses.find(item => item.id === id);
+      const c = courses.find(item => item.id === document.getElementById('quiz-course-select').value);
       const when = document.getElementById('quiz-when-input').value.trim();
       const topic = document.getElementById('quiz-topic-input').value.trim();
-
-      quizzes.unshift({
-        id: 'q-' + Date.now(),
-        courseCode: c.code,
-        courseName: c.name,
-        title: topic,
-        when,
-        status: 'upcoming',
-        makeupRequested: false
-      });
-      notifications.unshift({ id: 'n-' + Date.now(), title: `Quiz Alert: ${c.code}`, body: `${topic} • ${when}`, time: 'Just now', unread: true });
-
+      quizzes.unshift({ id: 'q-' + Date.now(), courseCode: c.code, courseName: c.name, title: topic, when, status: 'upcoming', makeupRequested: false });
       document.getElementById('quiz-topic-input').value = '';
       renderQuizzes();
-      renderNotifications();
       triggerBoardFeedback(`Published Quiz Alert for ${c.code}!`);
-      showToast(`Quiz Alert: ${c.code}`, `${topic} (${when})`, 'warning');
     }
 
     function handlePublishAnnouncement(e) {
@@ -1964,37 +2424,12 @@
       const category = document.getElementById('ann-category-select').value;
       const title = document.getElementById('ann-title-input').value.trim();
       const body = document.getElementById('ann-body-input').value.trim();
-      const sendPush = document.getElementById('ann-push-check').checked;
-
-      announcements.unshift({
-        id: 'ann-' + Date.now(),
-        sender,
-        category,
-        title,
-        body,
-        time: 'Just now',
-        unread: true
-      });
-
-      if (sendPush) {
-        notifications.unshift({
-          id: 'n-' + Date.now(),
-          title: `${category} Notice: ${sender}`,
-          body: title,
-          time: 'Just now',
-          unread: true
-        });
-      }
-
+      announcements.unshift({ id: 'ann-' + Date.now(), sender, category, title, body, time: 'Just now', unread: true });
       document.getElementById('ann-title-input').value = '';
       document.getElementById('ann-body-input').value = '';
       renderAnnouncements();
-      renderNotifications();
       renderBoardPanels();
       triggerBoardFeedback(`Published Campus Notice: "${title}"!`);
-      if (sendPush) {
-        showToast(`${category} Announcement`, title, category === 'Urgent' ? 'danger' : 'info');
-      }
     }
 
     function renderBoardPanels() {
@@ -2005,51 +2440,35 @@
       document.getElementById('sidebar-pending-pill').classList.toggle('hidden', pendingCount === 0);
       document.getElementById('board-kpi-pending').textContent = pendingCount;
 
-      // Board Announcements List
       const annList = document.getElementById('board-announcements-list');
       if (annList) {
         annList.innerHTML = announcements.map(a => `
           <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-700 space-y-1">
-            <div class="flex items-center justify-between text-[10px]">
-              <span class="font-extrabold uppercase text-brand-600">${a.category} • ${a.sender}</span>
-              <span class="text-slate-400">${a.time}</span>
-            </div>
+            <div class="flex items-center justify-between text-[10px]"><span class="font-extrabold uppercase text-brand-600">${a.category} • ${a.sender}</span><span class="text-slate-400">${a.time}</span></div>
             <p class="text-xs font-bold">${a.title}</p>
             <p class="text-[11px] text-slate-500 line-clamp-2">${a.body}</p>
           </div>
         `).join('');
       }
 
-      // Board Finance Queue
       const finContainer = document.getElementById('board-finance-queue');
       if (finContainer) {
         finContainer.innerHTML = financeQueue.map(item => `
-          <div class="p-3.5 rounded-2xl border ${item.status === 'approved' ? 'border-emerald-200 bg-emerald-50/40 dark:border-emerald-800/50 dark:bg-emerald-950/20' : 'border-amber-200 bg-amber-50/40 dark:border-amber-800/50 dark:bg-amber-950/20'} flex flex-wrap items-center justify-between gap-3">
+          <div class="p-3.5 rounded-2xl border ${item.status === 'approved' ? 'border-emerald-200 bg-emerald-50/40' : 'border-amber-200 bg-amber-50/40'} flex flex-wrap items-center justify-between gap-3">
             <div>
-              <div class="flex items-center gap-2">
-                <span class="text-xs font-bold">${item.studentName}</span>
-                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-200/80 dark:bg-slate-700">ID: ${item.studentId}</span>
-              </div>
+              <span class="text-xs font-bold">${item.studentName}</span> <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700">ID: ${item.studentId}</span>
               <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">${item.method} • Ref: <span class="font-mono font-bold">${item.reference}</span> • <strong>${item.amount}</strong></p>
             </div>
-            ${item.status === 'approved'
-              ? `<span class="text-xs font-bold text-emerald-600 flex items-center gap-1"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Cleared</span>`
-              : `<button onclick="approveFinanceSlip('${item.id}')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition">
-                  Verify & Unlock Permit
-                </button>`}
+            ${item.status === 'approved' ? `<span class="text-xs font-bold text-emerald-600">Cleared</span>` : `<button onclick="approveFinanceSlip('${item.id}')" class="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold">Verify & Unlock Permit</button>`}
           </div>
         `).join('');
       }
 
-      // Board Room Monitor
       const roomBox = document.getElementById('board-room-monitor');
       if (roomBox) {
         roomBox.innerHTML = courses.filter(c => c.enrolled).map(c => `
           <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/70 flex items-center justify-between text-xs">
-            <div>
-              <span class="font-extrabold">${c.code}</span> • <span class="font-semibold">${c.room}</span>
-              <p class="text-[11px] text-slate-500">${c.time} • ${c.lecturer}</p>
-            </div>
+            <div><span class="font-extrabold">${c.code}</span> • <span class="font-semibold">${c.room}</span><p class="text-[11px] text-slate-500">${c.time} • ${c.lecturer}</p></div>
             <span class="font-bold text-[11px] ${c.status === 'Canceled' ? 'text-rose-500' : 'text-emerald-600'}">${c.status}</span>
           </div>
         `).join('');
@@ -2064,18 +2483,9 @@
       if (rec.isCurrentUser) {
         tuitionStatus = 'cleared';
         updateClearanceUI();
-        notifications.unshift({
-          id: 'n-' + Date.now(),
-          title: 'Tuition Slip Approved by Finance!',
-          body: `Deposit ${rec.reference} verified. Your Exam Clearance is updated!`,
-          time: 'Just now',
-          unread: true
-        });
-        renderNotifications();
       }
       renderBoardPanels();
       triggerBoardFeedback(`Approved ${rec.studentName}'s deposit (${rec.reference})!`);
-      showToast('Finance Clearance Approved', `${rec.studentName} (${rec.reference}) verified.`, 'success');
     }
 
     function handleReceptionOnboard(e) {
@@ -2094,28 +2504,21 @@
     function renderNotifications() {
       const unread = notifications.filter(n => n.unread).length;
       const badge = document.getElementById('notif-badge');
-      badge.textContent = unread;
-      badge.classList.toggle('hidden', unread === 0);
+      if (badge) {
+        badge.textContent = unread;
+        badge.classList.toggle('hidden', unread === 0);
+      }
       document.getElementById('drawer-notif-count').textContent = unread;
-
       document.getElementById('notifications-list').innerHTML = notifications.map(n => `
-        <div class="p-3 rounded-2xl border ${n.unread ? 'bg-brand-50/50 dark:bg-brand-950/30 border-brand-200 dark:border-brand-800' : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200/70 dark:border-slate-800'}">
-          <div class="flex justify-between gap-2 mb-0.5">
-            <span class="text-xs font-bold">${n.title}</span>
-            <span class="text-[10px] text-slate-400">${n.time}</span>
-          </div>
+        <div class="p-3 rounded-2xl border ${n.unread ? 'bg-brand-50/50 dark:bg-brand-950/30 border-brand-200' : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200/70'}">
+          <div class="flex justify-between gap-2 mb-0.5"><span class="text-xs font-bold">${n.title}</span><span class="text-[10px] text-slate-400">${n.time}</span></div>
           <p class="text-[11px] text-slate-600 dark:text-slate-300">${n.body}</p>
         </div>
       `).join('');
     }
 
-    function toggleNotificationsDrawer(open) {
-      document.getElementById('notifications-drawer').classList.toggle('hidden', !open);
-    }
-    function markAllNotificationsRead() {
-      notifications.forEach(n => n.unread = false);
-      renderNotifications();
-    }
+    function toggleNotificationsDrawer(open) { document.getElementById('notifications-drawer').classList.toggle('hidden', !open); }
+    function markAllNotificationsRead() { notifications.forEach(n => n.unread = false); renderNotifications(); }
 
     function openClassDetailModal(id) {
       selectedModalCourseId = id;
@@ -2138,9 +2541,7 @@
       updateReminderToggleUI(c.reminder30m);
       document.getElementById('class-detail-modal').classList.remove('hidden');
     }
-    function closeClassDetailModal() {
-      document.getElementById('class-detail-modal').classList.add('hidden');
-    }
+    function closeClassDetailModal() { document.getElementById('class-detail-modal').classList.add('hidden'); }
     function toggleCourseReminder() {
       const c = courses.find(item => item.id === selectedModalCourseId);
       if (!c) return;
@@ -2184,13 +2585,8 @@
       };
       toast.className = `toast-enter pointer-events-auto p-3 rounded-2xl border backdrop-blur-md shadow-xl flex items-start gap-2.5 ${styles[type] || styles.info}`;
       toast.innerHTML = `
-        <div class="w-6 h-6 rounded-lg bg-white/15 flex items-center justify-center shrink-0 mt-0.5">
-          <i data-lucide="bell-ring" class="w-3.5 h-3.5"></i>
-        </div>
-        <div class="flex-1 min-w-0">
-          <p class="text-xs font-bold truncate">${title}</p>
-          <p class="text-[11px] opacity-90 leading-snug mt-0.5">${message}</p>
-        </div>
+        <div class="w-6 h-6 rounded-lg bg-white/15 flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="bell-ring" class="w-3.5 h-3.5"></i></div>
+        <div class="flex-1 min-w-0"><p class="text-xs font-bold truncate">${title}</p><p class="text-[11px] opacity-90 leading-snug mt-0.5">${message}</p></div>
       `;
       container.appendChild(toast);
       lucide.createIcons();
